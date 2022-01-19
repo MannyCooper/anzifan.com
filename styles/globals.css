@@ -14,3 +14,27 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* blockquote:before {
+  content: "\275d";
+  float: left;
+  position: relative;
+  font-size: 300%;
+  top: -10px;
+  margin-left: -44px;
+  --tw-text-opacity: 1;
+  color: rgba(255, 55, 95, var(--tw-text-opacity));
+  line-height: 0px;
+}
+
+blockquote:after {
+  content: "\275e";
+  float: right;
+  position: relative;
+  font-size: 300%;
+  top: 44px;
+  margin-right: -44px;
+  --tw-text-opacity: 1;
+  color: rgba(255, 55, 95, var(--tw-text-opacity));
+  line-height: 0px;
+} */
