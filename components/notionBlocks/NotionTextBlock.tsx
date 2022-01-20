@@ -24,7 +24,7 @@ export function NotionText({ text }: { text: any }) {
                 className={`${text.content.indexOf('\n') > -1 ? 'whitespace-pre-line' :'' } ${className.join('') !== '' ? className.join(' '):''}`}
             >
                 {text.link ? (
-                    <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline  text-hex-ff2d55`} 
+                    <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline  ${text.content.startsWith('@')?'text-hex-007aff':'text-hex-ff2d55'}`} 
                     after="content-↗"
                     href={text.link.url} target="_blank" rel="noopener noreferrer">
                         {text.content}

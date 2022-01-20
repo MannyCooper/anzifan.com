@@ -58,7 +58,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between px-6 py-3 mx-auto lg:px-11 lg:w-screen-lg">
         <Link href="/">异次元の机智君</Link>
         <div>
-          <nav className="flex items-center justify-center hidden space-x-5 md:flex">
+          <nav className="flex items-center justify-center hidden space-x-5 sm:flex">
             {navigations.map((n, i) => (
               <Link href={n.link} key={i}>
                 <a className="flex items-center justify-center space-x-1 group" href={n.link}>
@@ -69,7 +69,7 @@ const Navbar = () => {
             ))}
           </nav>
 
-          <div className="block md:hidden">
+          <div className="block sm:hidden">
             <Menu as="div" className="relative text-left ">
               <Menu.Button className="flex items-center text-current bg-transparent cursor-pointer rounded-3xl focus:outline-none m-0 px-0">
                 {({ open }) => (

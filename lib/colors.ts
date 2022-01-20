@@ -27,7 +27,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-red-50',
-            dark: 'bg-red-900'
+            dark: 'bg-red-900',
+            msgLight: 'bg-hex-ff3b30',
+            msgDark: 'bg-hex-ff453a',
         },
     },
     'orange': { 
@@ -39,7 +41,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-orange-50',
-            dark: 'bg-orange-900'
+            dark: 'bg-orange-900',
+            msgLight: 'bg-hex-ff9500',
+            msgDark: 'bg-hex-ff9f0a',
         },
     },
     'yellow': { 
@@ -51,7 +55,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-yellow-50',
-            dark: 'bg-yellow-900'
+            dark: 'bg-yellow-900',
+            msgLight: 'bg-hex-ffcc00',
+            msgDark: 'bg-hex-ffd60a',
         },
     },
     'green': { 
@@ -63,7 +69,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-green-50',
-            dark: 'bg-green-900'
+            dark: 'bg-green-900',
+            msgLight: 'bg-hex-34c759',
+            msgDark: 'bg-hex-30d158',
         },
     },
     'blue': { 
@@ -75,7 +83,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-blue-50',
-            dark: 'bg-blue-900'
+            dark: 'bg-blue-900',
+            msgLight: 'bg-hex-007aff',
+            msgDark: 'bg-hex-0a84ff',
         },
     },
     'pink': { 
@@ -87,7 +97,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-rose-50',
-            dark: 'bg-rose-900'
+            dark: 'bg-rose-900',
+            msgLight: 'bg-hex-ff2d55',
+            msgDark: 'bg-hex-ff375f',
         },
     },
     'purple': { 
@@ -99,7 +111,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-indigo-50',
-            dark: 'bg-indigo-900'
+            dark: 'bg-indigo-900',
+            msgLight: 'bg-hex-5856d6',
+            msgDark: 'bg-hex-5e5ce6',
         },
     },
     'brown': {
@@ -111,7 +125,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-amber-50',
-            dark: 'bg-amber-900'
+            dark: 'bg-amber-900',
+            msgLight: 'bg-hex-a2845e',
+            msgDark: 'bg-hex-ac8e68',
         },
     },
     'gray': {
@@ -123,7 +139,9 @@ export const Colors : colorsType = {
         },
         bg: {
             light: 'bg-true-gray-100',
-            dark: 'bg-true-gray-900'
+            dark: 'bg-true-gray-900',
+            msgLight: 'bg-true-gray-300',
+            msgDark: 'bg-true-gray-400',
         },
     },    
 }

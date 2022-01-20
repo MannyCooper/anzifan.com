@@ -21,6 +21,19 @@ const NotionCode = ({ value }: { value: any }) => {
     let syntax = value.language
     let code = value.text.length > 0 && value.text[0].text.content
 
+    const renderRawHTMLTag = "<!--HTML-->"
+
+    if (
+        syntax === 'html' &&
+        code
+          .trimLeft()
+          .startsWith(renderRawHTMLTag)
+      ) {
+        return (
+            <div dangerouslySetInnerHTML={{__html: code.replace(renderRawHTMLTag,'')}} />          
+        )
+      }
+
     // for jsx
     if (syntax === 'javascript' &&
         code
@@ -30,8 +43,6 @@ const NotionCode = ({ value }: { value: any }) => {
         syntax = 'jsx'
         code = code.split("\n").slice(1).join("\n")
     }
-
-
 
     return (
         <div className="relative my-4 rounded-2xl overflow-hidden">

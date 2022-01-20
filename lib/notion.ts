@@ -5,16 +5,17 @@ const notion = new Client({ auth: process.env.NOTION_KEY })
 const databaseId = process.env.NOTION_DATABASE_ID || '7fddb522451e4ac68922d1515da1f5f4'
 
 export const getDatabase = async (slug?: string) => {
+    // TODO: Preview mode support in future
     let dbQuery: any = {
         database_id: databaseId,
         filter: { and: [{ property: 'Published', checkbox: { equals: true } }] },
         sorts: [{ property: 'Date', direction: 'descending' }],
     }
 
-    //Get post by slug
-    if (slug) {
-        dbQuery.filter.and.push({ property: 'Slug', rich_text: { equals: slug } })
-    }
+    // //Get post by slug
+    // if (slug) {
+    //     dbQuery.filter.and.push({ property: 'Slug', rich_text: { equals: slug } })
+    // }
 
     const response = await notion.databases.query(dbQuery)
 

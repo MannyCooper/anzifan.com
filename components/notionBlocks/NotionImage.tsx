@@ -4,7 +4,7 @@ import { NotionText } from "./NotionTextBlock"
 import { useState } from "react"
 
 const NotionImage = ({ value }: { value: any }) => {
-    let { src: imageSrc, caption: imageCaption } = getMediaCtx(value)
+    let { src: imageSrc, caption: imageCaption, expire } = getMediaCtx(value)
 
     // Temporary solution for nested images in column_list
 
@@ -33,11 +33,12 @@ const NotionImage = ({ value }: { value: any }) => {
             // }}
             >
                 {width && height ? (
+                    expire === null ?
                     <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height}
                         placeholder="blur"
                         blurDataURL={value.blur} 
                         onLoad={handleLoad}
-                    />
+                    />: <img className="rounded-2xl" src={imageSrc} alt={imageCaption} width={width} height={height} />
                 ) : (
                     <img className="rounded-2xl" src={imageSrc} alt={imageCaption}  />
                 )}

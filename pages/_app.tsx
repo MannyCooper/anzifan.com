@@ -1,4 +1,5 @@
-import { config } from '@fortawesome/fontawesome-svg-core'
+import { config, library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import 'windi.css'
@@ -23,6 +24,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 config.autoAddCss = false
+library.add(fab)
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 

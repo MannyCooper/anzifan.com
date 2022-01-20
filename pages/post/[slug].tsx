@@ -15,9 +15,13 @@ import Moment from "react-moment"
 import Link from "next/link"
 import { Colors } from "../../lib/colors"
 import { getPlaiceholder } from "plaiceholder";
+import { Reaction, Share } from "../../components/Share";
+import Licensing from "../../components/Licensing";
+import TagsIcon from '../../assets/tags.svg'
+import Pagination from "../../components/Pagination";
+// import Comment from "../../components/Comment";
 
-
-const PostPage: NextPage<{ page: any; blocks: any[] }> = ({ page, blocks }) => {
+const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any }> = ({ page, blocks, pagination }) => {
     if (!page || !blocks) {
         return <>
             <Head>
@@ -41,9 +45,10 @@ const PostPage: NextPage<{ page: any; blocks: any[] }> = ({ page, blocks }) => {
                             local />
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
-                    <p className="text-xl font-medium text-true-gray-600 lg:text-2xl">
+                    <p className="text-xl font-medium text-true-gray-600 lg:text-2xl mb-4">
                         {page.excerpt}
                     </p>
+                    <Share />
                 </header>
             </ContentLayout>
             <CoverLayout>
@@ -61,8 +66,21 @@ const PostPage: NextPage<{ page: any; blocks: any[] }> = ({ page, blocks }) => {
                     )
                 })}
                 {/* </div> */}
+                {/* Tags */}
+                <div className="flex flex-nowrap space-x-2 overflow-auto w-full">
+                    <TagsIcon />
+                    {page.tags.map((tag: any) => {
+                        return <div className={`${Colors[tag.color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} key={tag.name}>
+                            {tag.name}
+                        </div>
+                    }
+                    )}
+                </div>
+                <Licensing page={page} />
+                <Pagination pagination={pagination} ></Pagination>
+                {/* <Reaction /> */}
+                {/* <Comment /> */}
             </ContentLayout>
-
         </>
     )
 }
@@ -87,8 +105,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // const post = db[0].id
     // const page = await getPage(post)
 
-    const page = db[0]
-    if (!page) return { props: {}, revalidate: 1 }
+    // const page = db[0]
+    const pageIndex = db.findIndex(p => p.slug === slug)
+    const page = db[pageIndex]
+
+    const pagination: any = {
+        prev: pageIndex - 1 >= 0 ? db[pageIndex - 1] : null,
+        next: pageIndex + 1 < db.length ? db[pageIndex + 1] : null
+      }
+
+    if (!page) return { props: {}, revalidate: 10 }
 
 
     if (page) {
@@ -166,7 +192,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             })
     )
 
-    return { props: { page, blocks: blocksWithChildren }, revalidate: 1 }
+    return { props: { page, blocks: blocksWithChildren , pagination}, revalidate: 10 }
 }
 
 (PostPage as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {
