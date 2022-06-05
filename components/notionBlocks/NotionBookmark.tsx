@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink as LinkIcon } from '@fortawesome/free-solid-svg-icons'
 
-import useSWR from 'swr'
+import useSWRImmutable from 'swr/immutable'
 import Link from 'next/link'
 
 const previewFetcher = (url: string) => fetch(`/api/bookmark/${encodeURIComponent(url)}`).then(res => res.json())
 
 const NotionBookmark = ({ value }: { value: any }) => {
     const { url } = value
-    const { data, error } = useSWR(url, previewFetcher)
+    const { data, error } = useSWRImmutable(url, previewFetcher)
 
     if (error)
         return (

@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/layout/BlogLayout.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/layout/BlogLayout.js", "pages/api/page-views/page-views.js"],
   "exclude": ["node_modules"]
 }

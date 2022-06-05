@@ -15,6 +15,15 @@ a {
   box-sizing: border-box;
 }
 
+@screen lg {
+  .more-list > :nth-last-child(-n+2){
+    margin-bottom: 0;
+  }
+  .more-list > :nth-last-child(-n+2)::after {    
+      display: none;
+  }   
+}
+
 /* blockquote:before {
   content: "\275d";
   float: left;

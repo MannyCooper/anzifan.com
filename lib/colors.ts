@@ -9,7 +9,7 @@
 // Pink
 // Red
 
-type colorsType = {
+export type colorsType = {
     [key: string]: {
         [text: string] : {
             light: string, dark: string, msgDark?: string, msgLight?: string

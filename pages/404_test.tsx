@@ -1,4 +1,4 @@
-import Image from 'next/Image';
+import Image from 'next/image';
 import ListLayout from '../components/layout/ListLayout';
 
 export default function Custom404() {

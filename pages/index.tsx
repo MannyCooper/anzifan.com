@@ -10,6 +10,10 @@ import PostList from '../components/PostList'
 import { Post } from '../lib/types'
 
 import { getPlaiceholder } from "plaiceholder";
+import { WidgetMeMedium, WidgetMeSmall } from '../components/widget/WidgetMe'
+import ListLayout from '../components/layout/ListLayout'
+import { WidgetOverViewMedium, WidgetOverViewSmall } from '../components/widget/WidgetOverview'
+import { Media, MediaContextProvider } from '../components/utility/Breakpoints'
 
 // type PostResult = QueryDatabaseResponse['results'][number];
 
@@ -17,27 +21,43 @@ import { getPlaiceholder } from "plaiceholder";
 //   posts: Post[];
 // }
 
-
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
+  const mainPosts = posts.slice(0, 17)
 
   return (
     <>
-      <PostList posts={posts} />
+      <ListLayout>
+        <MediaContextProvider >
+          <Media greaterThanOrEqual="md" className="grid grid-cols-2 gap-6.5 lg:gap-10">
+            <WidgetMeMedium />
+            <WidgetOverViewMedium posts={posts} />
+          </Media>
+          <Media lessThan="md" className="grid grid-cols-2 gap-4">
+            <WidgetMeSmall />
+            <WidgetOverViewSmall posts={posts} />
+          </Media>
+        </MediaContextProvider>
+      </ListLayout>
+      <PostList posts={mainPosts} />
     </>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const db = await getDatabase()
-
-  for (let post of db) {    
+  for (let post of db) {
     if (post) {
-      (post).cover.blurLight = (await getPlaiceholder(post.cover.light, {
-        size: 10,
-      })).base64;
-      (post).cover.blurDark = (await getPlaiceholder(post.cover.dark, {
-        size: 10,       
-      })).base64; 
+      try {
+        post.cover.blurLight = (await getPlaiceholder(post.cover.light, {
+          size: 10,
+        })).base64
+        post.cover.blurDark = (await getPlaiceholder(post.cover.dark, {
+          size: 10,
+        })).base64
+      } catch (e) {
+        post.cover.blurLight = ''
+        post.cover.blurDark = ''
+      }
     }
   }
 

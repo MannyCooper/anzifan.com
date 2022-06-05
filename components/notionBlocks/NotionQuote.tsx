@@ -1,5 +1,5 @@
 import { NotionText } from "./NotionTextBlock"
-import useSWR from 'swr'
+import useSWRImmutable from 'swr/immutable'
 import Link from "next/link"
 
 const NotionQuote = ({ value }: { value: any }) => {
@@ -15,7 +15,7 @@ const NotionQuote = ({ value }: { value: any }) => {
     }
 
     const previewFetcher = (url: string) => fetch(`/api/bookmark/${encodeURIComponent(url)}`).then(res => res.json())
-    const { data, error } = useSWR(link ?? null, previewFetcher)
+    const { data, error } = useSWRImmutable(link ?? null, previewFetcher)
 
     if (!link || error) {
         return (

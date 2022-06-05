@@ -6,9 +6,13 @@ import { faInfoCircle as InfoIcon, faExclamationTriangle as WarningIcon, faBell 
 
 const NotionCallout = ({ value }: { value: any }) => {
     // read first bg color of text as callout background color
-    let calloutColor = value.text[0].annotations.color
+    let calloutBackgroundColor = value.color
+    let calloutTextBgColor = value.text[0].annotations.color
 
-    calloutColor = calloutColor.endsWith('_background') ? calloutColor.replace('_background', '') : 'gray'
+    calloutTextBgColor = calloutTextBgColor.endsWith('_background') ? calloutTextBgColor.replace('_background', '') : 'gray'
+
+    calloutBackgroundColor = calloutBackgroundColor.endsWith('_background') ? calloutBackgroundColor.replace('_background', '') : 'gray'
+
 
     const icon = value.icon.emoji
     function iconTransformer(icon: any){
@@ -27,7 +31,7 @@ const NotionCallout = ({ value }: { value: any }) => {
     }
 
     return (
-        <p className={`flex p-5 my-4 space-x-3 rounded-2xl ${Colors[calloutColor].bg.light} ${Colors[calloutColor].text.msgLight}`}>
+        <p className={`flex p-5 my-4 space-x-3 rounded-2xl ${Colors[calloutBackgroundColor].bg.light} ${Colors[calloutBackgroundColor].text.msgLight}`}>
             <span className="flex items-center">
                 {iconTransformer(icon)}
             </span>

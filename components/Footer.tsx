@@ -5,10 +5,11 @@ import { Nextdotjs, Notion, Tailwindcss, Vercel } from '@icons-pack/react-simple
 
 
 const Footer = () => {
+    const thisYear = new Date().getFullYear();
     return (
         <>
-            <footer className="relative bg-true-gray-50">
-                    <div className="flex flex-col px-6 mx-auto items-left lg:px-11 lg:w-screen-lg">
+            <footer className="relative bg-true-gray-50 mt-12">
+                <div className="flex flex-col px-6 mx-auto items-left lg:px-11 lg:w-screen-lg">
                     <nav className="py-4">
                         <Link href='/'>
                             <a>
@@ -22,18 +23,18 @@ const Footer = () => {
                                 <div className="inline-flex px-2 py-1 mx-2 space-x-2 bg-true-gray-200 rounded-full">
                                     <Notion size={12} />
                                     <Nextdotjs size={12} />
-                                    <Tailwindcss size={12}/>
+                                    <Tailwindcss size={12} />
                                     <Vercel size={12} />
                                 </div>
                             </div>
-                            <p>dark mode toggle</p>
+                            <p className="line-through">dark toggle</p>
                             {/* <ThemeToggle /> */}
                         </div>
                         <div className="text-xs text-grey">
-                            Copyright © 2020-2022 安子璠
+                            Copyright © 2020-{thisYear} 安子璠
                         </div>
                     </section>
-                    </div>
+                </div>
             </footer>
         </>
     )

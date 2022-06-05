@@ -37,7 +37,7 @@ const Licensing = (post: { page: Post }) => {
                     <p className="line-clamp-1 font-semibold">{post.page.title}</p>
                     <Link href={`/post/${post.page.slug}`} as={`/post/${post.page.slug}`}>
                         <a>
-                        <p className="text-sm text-gray-400 line-clamp-1">{hostname}/post/{post.page.slug}</p>
+                        <p className="text-sm text-true-gray-400 line-clamp-1">{hostname}/post/{post.page.slug}</p>
                         </a>
                     </Link>
                 </header>
@@ -45,8 +45,8 @@ const Licensing = (post: { page: Post }) => {
                     {
                         Object.keys(config).map(key =>
                             <div className="mr-4" key={key}>
-                                <p className="text-xs line-clamp-1">{key}</p>
-                                <p className="md:text-sm text-xs line-clamp-1 font-semibold">{config[key]}</p>
+                                <p className="text-xs line-clamp-1 text-true-gray-600">{key}</p>
+                                <p className="md:text-sm text-xs line-clamp-1">{config[key]}</p>
                             </div>
                         )
                     }

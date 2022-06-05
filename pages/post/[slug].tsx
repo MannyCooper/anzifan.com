@@ -19,9 +19,13 @@ import { Reaction, Share } from "../../components/Share";
 import Licensing from "../../components/Licensing";
 import TagsIcon from '../../assets/tags.svg'
 import Pagination from "../../components/Pagination";
-// import Comment from "../../components/Comment";
+import Comment from "../../components/Comment";
+import { Media, MediaContextProvider } from "../../components/utility/Breakpoints";
+import { WidgetMeMedium, WidgetMeSmall } from "../../components/widget/WidgetMe";
+import { WidgetOverViewMedium, WidgetOverViewSmall } from "../../components/widget/WidgetOverview";
+import ListLayout from "../../components/layout/ListLayout";
 
-const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any }> = ({ page, blocks, pagination }) => {
+const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
     if (!page || !blocks) {
         return <>
             <Head>
@@ -45,18 +49,20 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any }> = ({ pag
                             local />
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
-                    <p className="text-xl font-medium text-true-gray-600 lg:text-2xl mb-4">
+                    <p className="mb-4 text-xl font-medium text-true-gray-600 lg:text-2xl">
                         {page.excerpt}
                     </p>
                     <Share />
                 </header>
             </ContentLayout>
             <CoverLayout>
-                <Image src={page.cover.light} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={page.title}
-                    // onLoadingComplete={handleLoad}
-                    placeholder="blur"
-                    blurDataURL={page.cover.blurLight}
-                    className="md:rounded-2xl transition-all duration-500 ease-in-out" data-aos="fade-up" data-aos-duration="500" />
+                <div className="md:rounded-3xl">
+                    <Image src={page.cover.light} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={page.title}
+                        // onLoadingComplete={handleLoad}
+                        placeholder="blur"
+                        blurDataURL={page.cover.blurLight}
+                        className="relative z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" data-aos="fade-up" data-aos-duration="500" />
+                </div>
             </CoverLayout>
             <ContentLayout>
                 {/* <div data-aos="fade-down"> */}
@@ -67,19 +73,40 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any }> = ({ pag
                 })}
                 {/* </div> */}
                 {/* Tags */}
-                <div className="flex flex-nowrap space-x-2 overflow-auto w-full">
+                <div className="flex w-full space-x-2 overflow-auto flex-nowrap">
                     <TagsIcon />
-                    {page.tags.map((tag: any) => {
-                        return <div className={`${Colors[tag.color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} key={tag.name}>
+                    {page.tags.map((tag: any) =>  
+                    <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
+                        <a href={`/tag/${tag.name}`}>
+                        <div className={`${Colors[tag.color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
                             {tag.name}
                         </div>
-                    }
+                        </a>
+                    </Link>
                     )}
                 </div>
                 <Licensing page={page} />
                 <Pagination pagination={pagination} ></Pagination>
-                {/* <Reaction /> */}
-                {/* <Comment /> */}
+                {/* <Reaction /> */}                          
+            </ContentLayout>
+            <ContentLayout>
+            <MediaContextProvider >
+                    <Media greaterThanOrEqual="sm" className="grid grid-cols-2 md:grid-cols-2 gap-4">
+                        {/* <WidgetMeSmall />
+                        <WidgetOverViewSmall posts=1{posts} /> */}
+                        <WidgetMeMedium fix={true} />
+                        <WidgetOverViewMedium posts={posts} fix={true} />
+                    </Media>
+                    <Media lessThan="sm" className="grid grid-cols-2 gap-2">
+                    {/* <WidgetMeMedium />
+                        <WidgetOverViewMedium posts={posts} /> */}
+                        <WidgetMeSmall />
+                        <WidgetOverViewSmall posts={posts} />
+                    </Media>
+                </MediaContextProvider>
+            </ContentLayout>
+            <ContentLayout>
+                <Comment />     
             </ContentLayout>
         </>
     )
@@ -100,30 +127,33 @@ interface Props extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const { slug } = params as Props
-    const db = await getDatabase(slug)
-
+    const db = await getDatabase(slug)    
+    // const posts = await getDatabase()
     // const post = db[0].id
     // const page = await getPage(post)
 
     // const page = db[0]
+    // TODO: pagination causes the page's data too big(135kb), may be using search or changing it to a recommendation list
     const pageIndex = db.findIndex(p => p.slug === slug)
     const page = db[pageIndex]
 
     const pagination: any = {
         prev: pageIndex - 1 >= 0 ? db[pageIndex - 1] : null,
         next: pageIndex + 1 < db.length ? db[pageIndex + 1] : null
-      }
+    }
 
     if (!page) return { props: {}, revalidate: 10 }
 
 
     if (page) {
-        (page).cover.blurLight = (await getPlaiceholder(page.cover.light, {
+        // page.cover.blurLight = (await getPlaiceholder(page.cover.light)).css
+        // page.cover.blurDark = (await getPlaiceholder(page.cover.dark)).css
+        page.cover.blurLight = (await getPlaiceholder(page.cover.light, {
             size: 10,
-        })).base64;
-        (page).cover.blurDark = (await getPlaiceholder(page.cover.dark, {
+        })).base64
+        page.cover.blurDark = (await getPlaiceholder(page.cover.dark, {
             size: 10,
-        })).base64;
+        })).base64
     }
 
 
@@ -192,7 +222,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             })
     )
 
-    return { props: { page, blocks: blocksWithChildren , pagination}, revalidate: 10 }
+    return { props: { page, blocks: blocksWithChildren, pagination, posts : db }, revalidate: 10 }
 }
 
 (PostPage as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {

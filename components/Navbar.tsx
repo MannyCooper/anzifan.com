@@ -54,7 +54,7 @@ const MenuItemLink = (props: { [x: string]: any; href: any; children: any }) => 
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 font-bold bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-200" data-aos="fade-down">
+    <header className="sticky top-0 z-50 font-bold bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-200 border-b-1 border-b-true-gray-100" data-aos="fade-down" id="navbar">
       <div className="flex items-center justify-between px-6 py-3 mx-auto lg:px-11 lg:w-screen-lg">
         <Link href="/">异次元の机智君</Link>
         <div>
@@ -71,7 +71,7 @@ const Navbar = () => {
 
           <div className="block sm:hidden">
             <Menu as="div" className="relative text-left ">
-              <Menu.Button className="flex items-center text-current bg-transparent cursor-pointer rounded-3xl focus:outline-none m-0 px-0">
+              <Menu.Button className="flex items-center px-0 m-0 text-current bg-transparent cursor-pointer rounded-3xl focus:outline-none">
                 {({ open }) => (
                   !open &&
                   <FontAwesomeIcon icon={MenuIcon} size="2x" /> || <FontAwesomeIcon icon={MenuOpenIcon} size="2x" />
