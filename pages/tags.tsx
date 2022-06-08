@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             tags: tagsSorted,
         },
-        revalidate: 10,
+        revalidate: 60 * 60,
     }
 }
 

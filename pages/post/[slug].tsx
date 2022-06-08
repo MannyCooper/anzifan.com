@@ -159,7 +159,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         next: pageIndex + 1 < db.length ? next : null
     }
 
-    if (!page) return { props: {}, revalidate: 10 }
+    if (!page) return { props: {}, revalidate: 60 * 60 }
 
 
     if (page) {
@@ -237,7 +237,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             })
     )
 
-    return { props: { page, blocks: blocksWithChildren, pagination, posts: db }, revalidate: 10 }
+    return { props: { page, blocks: blocksWithChildren, pagination, posts: db }, revalidate: 60 * 60 }
 }
 
 (PostPage as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {

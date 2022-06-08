@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             cates: catesSorted,
         },
-        revalidate: 10,
+        revalidate: 60 * 60,
     }
 }
 

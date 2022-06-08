@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         posts: db,
         tag: tagsCount.filter((t: any) => t.name === tag)[0]
       },
-      revalidate: 10,
+      revalidate: 60 * 60,
     }
   }
   

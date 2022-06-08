@@ -8,7 +8,7 @@ import { ParsedUrlQuery } from "querystring";
 const CatePage: NextPage<{ posts: Post[], cate: Tag }> = ({ posts, cate }) => {
 
     return (
-        <>            
+        <>
             <PostList posts={posts} filter={cate.name} color={cate.color} count={cate.count} />
         </>
     )
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             posts: db,
             cate: catesCount.filter((t: any) => t.name === cate)[0]
         },
-        revalidate: 10,
+        revalidate: 60 * 60,
     }
 }
 
