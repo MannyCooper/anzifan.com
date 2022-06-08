@@ -8,6 +8,7 @@ import { Colors } from "../lib/colors"
 // import { useState } from "react";
 import CategoriesIcon from '../assets/categories.svg'
 import PostMore from "./PostMore";
+import { useTheme } from 'next-themes'
 
 interface PostListProps {
   posts: Post[],
@@ -17,6 +18,8 @@ interface PostListProps {
 }
 
 const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count?: number }> = ({ posts, filter, color, count }: PostListProps) => {
+
+  const { resolvedTheme } = useTheme()
 
   const mainPosts = posts.slice(0, 9)
   const morePosts = posts.slice(9, 17)
@@ -29,7 +32,7 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
     } : {
       cardSize: 'h-90 w-full col-span-6 md:(col-span-3 h-85) lg:(h-90 col-span-6 flex flex-row)',
       imgSize: 'h-3/5 md:h-5/9 lg:(h-full w-160)',
-      title: 'line-clamp-2 text-xl leading-tight md:(text-lg leading-tight) lg:text-3xl',
+      title: 'line-clamp-2 md:line-clamp-5 lg:line-clamp-6 text-xl leading-tight md:(text-lg leading-tight) lg:text-3xl',
     },
     medium: {
       cardSize: 'col-span-6 md:(col-span-3 h-85) h-90 lg:h-107',
@@ -76,11 +79,11 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
               <div className="flex justify-between">
                 <div>
                   <span
-                  // className={color == undefined ? "" : `${Colors[color]?.text.light ?? Colors['gray'].text.light}`}
+                  // className={color == undefined ? "" : `${Colors[color]?.text.normal ?? Colors['gray'].text.normal}`}
                   >{filter}</span>
                   <span>🌟</span>
                 </div>
-                <span className={`${color == undefined ? "" : `${Colors[color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} text-white`} text-center rounded-full px-2 h-full`}>
+                <span className={`${color == undefined ? "" : `${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} text-white`} text-center rounded-full px-2 h-full`}>
                   {count}
                 </span>
               </div>
@@ -89,7 +92,24 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
           <div className="grid grid-cols-6 gap-6.5 lg:gap-10">
             {mainPosts.map((post: Post, index: Number) => {
               const size = itemSizeSwitch(index)
-
+              const emptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+              let src
+              let blurSrc
+              switch (resolvedTheme) {
+                case 'light':
+                  src = post.cover.light
+                  blurSrc = post.cover.blurLight
+                  break
+                case 'dark':
+                  src = post.cover.dark
+                  blurSrc = post.cover.blurDark
+                  break
+                default:
+                  src = emptyImage
+                  blurSrc = emptyImage
+                  break
+              }
+            
               return (
                 <div key={post.id} className={`${size.cardSize}`}
                   data-aos="fade-up"
@@ -98,12 +118,12 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
                   <Link href="/post/[slug]" as={`/post/${post.slug}`} >
                     <a className="w-full">
                       <div className={`bg-white rounded-3xl overflow-hidden shadow-lg md:shadow-none shadow-true-gray-200 ${size.cardSize} flex flex-col group transition duration-500 ease-in-out transform-gpu mobile-hover:hover:scale-95
-                    md:hover:shadow-lg hover:rotate-0 hover:active:scale-95`}>
+                    md:hover:shadow-lg hover:rotate-0 hover:active:scale-95`} dark="bg-true-gray-900 shadow-none">
                         <header className={`relative ${size.imgSize} duration-500 ease-in-out md:(filter group-hover:brightness-90) transition`}>
-                          <Image src={post.cover.light} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={post.title}
+                          <Image src={src} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={post.title}
                             // onLoadingComplete={handleLoad}
                             placeholder="blur"
-                            blurDataURL={post.cover.blurLight}
+                            blurDataURL={blurSrc}
                             className="transition-all duration-500 ease-in-out opacity-100 md:(group-hover:scale-105 group-hover:opacity-90) transform-gpu" />
                         </header>
                         <div className="flex flex-col justify-between flex-1 p-6">
@@ -112,12 +132,12 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
                           >
                             <Link href="/category/[{Category}]" as={`/category/${post.category.name}`} passHref>
                               {/* <a> */}
-                              <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.light} `} >{post.category.name}</p>
+                              <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.normal}`}>{post.category.name}</p>
                               {/* </a> */}
                             </Link>
                             <h2 className={`${size.title} font-bold`}>{post.title}</h2>
                           </article>
-                          <Moment className="block mt-2 text-sm font-semibold text-true-gray-600" date={post.date} fromNow
+                          <Moment className="block mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400" date={post.date} fromNow
                             // format="MMM DD, yy"
                             format="yyyy 年 MM 月 DD 日"
                             local />
@@ -134,15 +154,15 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
       </ListLayout>
       {
         morePosts.length > 0 ?
-          <div className="bg-white">
+          <div className="bg-white" dark="bg-true-gray-900">
             <ListLayout>
               <PostMore posts={morePosts} />
             </ListLayout>
           </div> :
-          <div  data-aos="fade-up" className="text-center">
+          <div  data-aos="fade-up" className="text-center mb-10">
             <Link href={"/archive"}>
-              <a href="/archive">
-                <p className="text-center border-2 border-black inline-block py-2 px-5 rounded-full hover:(bg-black  text-white) transition ease-in-out duration-400">View Archive</p>
+              <a>
+                <p className="text-center border-2 border-black inline-block py-2 px-5 rounded-full hover:(bg-black  text-white) transition ease-in-out duration-400" dark="hover:(bg-white text-black) border-white">View Archive</p>
               </a>
             </Link>
           </div>

@@ -96,7 +96,7 @@ export function renderNotionBlock(block: any) {
         case 'divider':
             return (
                 <div className="py-4 flex align-center">
-                    <hr className="w-9/10 m-auto" />
+                    <hr className="w-9/10 m-auto" dark="border-true-gray-600" />
                 </div>
             )
 

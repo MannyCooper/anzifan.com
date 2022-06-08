@@ -10,9 +10,9 @@ const TagCard = ({ name, color, count }: { name: string, color: string, count: n
     return (
         <Link href="/tag/[name]" as={`/tag/${name}`} key={name}>
             <a>
-                <div className={`${Colors[color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} bg-gradient-to-bl from-white/30 text-white flex items-center font-semibold py-3 px-5  rounded-full justify-between transform transition ease-in-out duration-200 hover:scale-95`}>
+                <div className={`${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} bg-gradient-to-bl from-white/30 text-white flex items-center font-semibold py-3 px-5  rounded-full justify-between transform transition ease-in-out duration-200 hover:scale-95`} dark="bg-gradient-to-tr from-black/30">
                     <p className="line-clamp-1"># {name}</p>
-                    <p className={`bg-white ${Colors[color]?.text.light ?? Colors['gray'].text.light} text-sm px-1.5 text-center rounded-full`}>{count}</p>
+                    <p className={`bg-white ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} text-sm px-1.5 text-center rounded-full`} >{count}</p>
                 </div>
             </a>
         </Link>

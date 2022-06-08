@@ -46,7 +46,7 @@ const Archive: NextPage<{ posts: Post[] }> = ({ posts }) => {
                                     <div className="pl-4 md:pl-8 basis-0 flex-shrink-0 flex-grow">
                                         <Link href="/category/[{Category}]" as={`/category/${post.category.name}`} passHref>
                                             {/* <a> */}
-                                            <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.light} `} >{post.category.name}</p>
+                                            <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.normal} `} >{post.category.name}</p>
                                             {/* </a> */}
                                         </Link>
                                         <p className="font-semibold line-clamp-3 text-lg leading-5 md:text-xl lg:text-2xl mt-1 md:mt-2">{post.title}</p>

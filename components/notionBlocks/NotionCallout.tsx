@@ -31,7 +31,7 @@ const NotionCallout = ({ value }: { value: any }) => {
     }
 
     return (
-        <p className={`flex p-5 my-4 space-x-3 rounded-2xl ${Colors[calloutBackgroundColor].bg.light} ${Colors[calloutBackgroundColor].text.msgLight}`}>
+        <p className={`flex p-5 my-4 space-x-3 rounded-2xl ${Colors[calloutBackgroundColor].bg.normal} ${Colors[calloutBackgroundColor].text.msg}`}>
             <span className="flex items-center">
                 {iconTransformer(icon)}
             </span>

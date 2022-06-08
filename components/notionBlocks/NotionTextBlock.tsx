@@ -15,8 +15,8 @@ export function NotionText({ text }: { text: any }) {
             italic ? 'italic' : '',
             strikethrough ? 'line-through' : '',
             underline ? 'underline' : '',
-            Colors[color]?.text.light ?? '',
-            color.endsWith('background') ? Colors[color.replace('_background','')]?.bg.light: ''
+            Colors[color]?.text.normal ?? '',
+            color.endsWith('background') ? Colors[color.replace('_background','')]?.bg.normal: ''
         ]
 
         return (
@@ -24,7 +24,7 @@ export function NotionText({ text }: { text: any }) {
                 className={`${text.content.indexOf('\n') > -1 ? 'whitespace-pre-line' :'' } ${className.join('') !== '' ? className.join(' '):''}`}
             >
                 {text.link ? (
-                    <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline-pink  ${text.content.startsWith('@')?'text-hex-007aff':'text-hex-ff2d55'}`} 
+                    <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size  ${text.content.startsWith('@')?'text-hex-007aff bg-underline-blue':'text-hex-ff2d55 bg-underline-pink'}`} 
                     after="content-↗"
                     href={text.link.url} target="_blank" rel="noopener noreferrer">
                         {text.content}

@@ -19,23 +19,23 @@ const FriendCard: FC<FriendType> = friend => {
     const { data, error } = useSWRImmutable(friend.url, previewFetcher)
     const friendCard = (status: Status) => {
         return (
-            <div className="flex items-center justify-center transition duration-200 ease-in-out transform bg-white shadow-lg h-55 lg:h-58 rounded-3xl hover:scale-105">
+            <div className="flex items-center justify-center transition duration-200 ease-in-out transform bg-white shadow-lg h-55 lg:h-58 rounded-3xl hover:scale-105" dark="bg-true-gray-900">
                 <div className="flex flex-col items-center justify-between h-full p-5">
                     <a href={friend.url} target="_blank" rel="noopener noreferrer">
-                        {status === Status.loading ? <div className="w-20 h-20 rounded-full bg-true-gray-200 animate-pulse" /> : 
-                        <div className="w-20 h-20 rounded-full bg-true-gray-200 relative overflow-hidden"><Image layout='fill' objectFit="cover" src={friend.img} alt={friend.url} />
+                        {status === Status.loading ? <div className="w-20 h-20 rounded-full bg-true-gray-200 animate-pulse" dark="bg-true-gray-600" /> : 
+                        <div className="w-20 h-20 rounded-full bg-true-gray-200 relative overflow-hidden" dark="bg-true-gray-600"><Image layout='fill' objectFit="cover" src={friend.img} alt={friend.url} />
                         </div>}
                     </a>
                     <div className="pb-2 text-center" >
                         <p className="leading-4">{friend.name}</p>
                         <p className="mt-1 text-sm text-true-gray-400">
                             {status !== Status.offline ?
-                                <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 animate-pulse ${status === Status.online ? Colors['green'].bg.msgLight : Colors['yellow'].bg.msgLight} rounded-full`} />{status === Status.online ? "Online" : "Loading"}</span>
+                                <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 animate-pulse ${status === Status.online ? Colors['green'].bg.msg : Colors['yellow'].bg.msg} rounded-full`} />{status === Status.online ? "Online" : "Loading"}</span>
                                 :
-                                <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 ${Colors['red'].bg.msgLight} rounded-full`} />Offline</span>
+                                <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 ${Colors['red'].bg.msg} rounded-full`} />Offline</span>
                             }</p>
                     </div>
-                    <a target="_blank" rel="noopener noreferrer" href={friend.url} className={`select-none rounded-full ${status === Status.online ? Colors['blue'].bg.msgLight : `${Colors['gray'].bg.msgLight} pointer-events-none`} text-white w-16 text-center text-sm p-1`} >
+                    <a target="_blank" rel="noopener noreferrer" href={friend.url} className={`select-none rounded-full ${status === Status.online ? Colors['blue'].bg.msg : `${Colors['gray'].bg.msg} pointer-events-none`} text-white w-16 text-center text-sm p-1`} >
                         Visit
                     </a>
                 </div>

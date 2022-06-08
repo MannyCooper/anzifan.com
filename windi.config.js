@@ -4,6 +4,7 @@ import defaultTheme from 'windicss/defaultTheme'
 const plugin = require('windicss/plugin')
 
 export default defineConfig({
+  darkMode: 'class',
   extract: {
     include: ['**/*.{jsx,tsx,css,js,ts}'],
     exclude: ['node_modules', '.git', '.next', '.*'],

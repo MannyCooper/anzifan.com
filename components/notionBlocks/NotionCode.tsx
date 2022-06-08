@@ -1,10 +1,12 @@
 // import { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialLight as lightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { materialDark as darkStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 // import { getHighlighter, setCDN } from 'shiki';
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react';
 
 const NotionCode = ({ value }: { value: any }) => {
-
     // TODO:Replace Prism with shiki.js
     // setCDN("https://unpkg.com/shiki/");
 
@@ -23,16 +25,26 @@ const NotionCode = ({ value }: { value: any }) => {
 
     const renderRawHTMLTag = "<!--HTML-->"
 
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
+    
     if (
         syntax === 'html' &&
         code
-          .trimLeft()
-          .startsWith(renderRawHTMLTag)
-      ) {
+            .trimLeft()
+            .startsWith(renderRawHTMLTag)
+    ) {
         return (
-            <div dangerouslySetInnerHTML={{__html: code.replace(renderRawHTMLTag,'')}} />          
+            <div dangerouslySetInnerHTML={{ __html: code.replace(renderRawHTMLTag, '') }} />
         )
-      }
+    }
 
     // for jsx
     if (syntax === 'javascript' &&
@@ -51,7 +63,7 @@ const NotionCode = ({ value }: { value: any }) => {
             </span>
             {/* <div dangerouslySetInnerHTML={{ __html: innerHtml }} /> */}
             <pre className="font-mono text-sm">
-                <SyntaxHighlighter style={lightStyle} wrapLongLines language={syntax} customStyle={{ paddingLeft: 30, paddingRight: 30, paddingTop: 25, margin: 0 }} >
+                <SyntaxHighlighter style={resolvedTheme === "dark" ? darkStyle : lightStyle} wrapLongLines language={syntax} customStyle={{ paddingLeft: 30, paddingRight: 30, paddingTop: 25, margin: 0 }} >
                     {code}
                 </SyntaxHighlighter>
             </pre>

@@ -13,7 +13,7 @@ import { useState } from "react"
 
 const CardLayout = ({ children }: any) => {
     return (
-        <div data-aos="fade-up" className={`bg-white rounded-3xl border-[0.5px] border-true-gray-100 relative overflow-hidden my-5 transform rotate-0`}>
+        <div data-aos="fade-up" className={`bg-white rounded-3xl border-[0.5px] border-true-gray-100 relative overflow-hidden my-5 transform rotate-0`} dark="bg-true-gray-900 border-true-gray-800">
             <div className="m-5 xs:m-8 md:m-8">
                 {children}
             </div>
@@ -64,7 +64,7 @@ const CardLayout = ({ children }: any) => {
 // }
 
 const Overview = () => {
-    const style = "bg-white rounded-3xl p-4 xs:p-4.5 sm:p-6 md:p-8 min-h-25 sm:min-h-37 flex flex-col justify-between transform rotate-0 overflow-hidden"
+    const style = "bg-white rounded-3xl p-4 xs:p-4.5 sm:p-6 md:p-8 min-h-25 sm:min-h-37 flex flex-col justify-between transform rotate-0 overflow-hidden dark:bg-true-gray-900"
     const social = me.social
     const publication = me.publications[0]
     const skills = me.skills
@@ -154,7 +154,7 @@ const Overview = () => {
                 <div className="text-white flex  justify-center items-center gap-0 sm:gap-1 md:gap-1 lg:gap-2 my-4">
                     {
                         social.map((s: any) =>
-                            <a last-after="absolute content-. text-transparent  w-4 h-4 rounded-full bg-red-500 right-0 top-0" last-before="absolute content-. text-transparent  w-4 h-4 animate-ping  rounded-full bg-red-400 right-0 top-0" target="_blank" rel="noopener noreferrer" className={`relative shadow-inner translate-y-5 even:(-translate-y-5) -ml-3 sm:ml-0  rounded-full p-3 sm:p-4 md:p-5 lg:p-6  flex justify-center items-center transform transition ease-in-out duration-200 hover:scale-105 md:hover:scale-95 aspect-ratio h-full bg-gradient-to-tr text-white  shadow-lg-middle   ${s.shadow} ${s.color} `} href={s.url} key={s.name}>
+                            <a last-after="absolute content-. text-transparent  w-4 h-4 rounded-full bg-red-500 right-0 top-0" last-before="absolute content-. text-transparent  w-4 h-4 animate-ping  rounded-full bg-red-400 right-0 top-0" target="_blank" rel="noopener noreferrer" className={`relative shadow-inner translate-y-5 even:(-translate-y-5) -ml-3 sm:ml-0  rounded-full p-3 sm:p-4 md:p-5 lg:p-6  flex justify-center items-center transform transition ease-in-out duration-200 hover:scale-105 md:hover:scale-95 aspect-ratio h-full bg-gradient-to-tr text-white  shadow-lg-middle dark:shadow-none ${s.shadow} ${s.color} `} href={s.url} key={s.name}>
                                 <s.icon className={`h-3 w-3 xs:(h-4 w-4) sm:(w-5 h-5) lg:(w-6 h-6) fill-white`}></s.icon>
                                 {/* <p className={`hidden md:block whitespace-nowrap`}>{s.name}</p>                */}
                             </a>
@@ -162,7 +162,7 @@ const Overview = () => {
                     }
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800" className={`bg-white rounded-3xl overflow-hidden min-h-25 sm:min-h-37 col-span-2 sm:col-span-1 flex flex-col relative justify-between`}>
+            <div data-aos="fade-up" data-aos-duration="800" className={`bg-white rounded-3xl overflow-hidden min-h-25 sm:min-h-37 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
                 <div className={`absolute transition duration-200  ease-in-out h-full w-full bg-true-gray-900 z-40 rounded-3xl text-white ${more ? "opacity-100" : "opacity-0"} overflow-auto scrollbar-hide justify-between flex flex-col`}>
                     <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8  text-sm font-semibold text-left xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl z-50 line-clamp-1 text-transparent`}>Technical Skills</p>
                     <div className="flex flex-col justify-end items-start w-full p-4 xs:p-4.5 sm:p-6 md:p-8 gap-3 lg: gap-4">
@@ -181,8 +181,8 @@ const Overview = () => {
                     </div>
                 </div>
                 <div className="flex flex-row items-center justify-between p-4 xs:p-4.5 sm:p-6 md:p-8">
-                    <p className={`text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1 ${more ? "text-white" : "text-black"}`}>Technical Skills</p>
-                    <div className={`h-full aspect-square grid place-items-center transition duration-500  ease-in-out z-50 hover:cursor-pointer transform ${more ? "rotate-45 bg-white text-black hover:bg-true-gray-200" : "rotate-0 bg-black text-white hover:bg-true-gray-500"} rounded-full`} onClick={handleMore}>
+                    <p className={`text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1 ${more ? "text-white dark:text-black" : "text-black dark:text-white"}`}>Technical Skills</p>
+                    <div className={`h-full aspect-square grid place-items-center transition duration-500  ease-in-out z-50 hover:cursor-pointer transform ${more ? "rotate-45 bg-white text-black hover:bg-true-gray-200" : "rotate-0 bg-black text-white hover:bg-true-gray-500"} rounded-full`} onClick={handleMore} dark="bg-true-gray-900">
                         <FontAwesomeIcon className="md:(transform scale-150)" icon={faPlus} />
                     </div>
                 </div>
@@ -230,7 +230,7 @@ const Overview = () => {
                     </div> */}
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden min-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`}>
+            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden min-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
                 <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8 text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1`}>
                     Educations
                 </p>
@@ -239,7 +239,7 @@ const Overview = () => {
                         {
                             education.map((edu) =>
                                 <div className="flex items-center gap-2" key={edu.name}>
-                                    <div className={`${Colors[edu.color].bg.msgLight} aspect-square h-3 rounded-full lg:h-4`} />
+                                    <div className={`${Colors[edu.color].bg.msg} aspect-square h-3 rounded-full lg:h-4`} />
                                     <p className="text-true-gray-400 text-sm lg:text-lg">{edu.degree}</p>
                                 </div>
                             )
@@ -250,15 +250,15 @@ const Overview = () => {
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
                                 <div className="col-span-5 flex flex-col gap-1 lg:gap-2">
                                     <a className="hover:opacity-80" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msgLight} rounded-full w-full relative ${Colors["blue"].text.msgLight}`} before="content-0 text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
+                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-0 text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
                                     </a>
                                     <a className="hover:opacity-80" href="https://www.nyit.edu/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msgLight} ${Colors["yellow"].text.msgLight} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
+                                        <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
                                 <a className="hover:opacity-80 col-span-3" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
-                                    <div className={`h-4 lg:h-6 ${Colors["red"].bg.msgLight} ${Colors["red"].text.msgLight} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
+                                    <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
@@ -281,9 +281,9 @@ const Overview = () => {
             </div>
             <div data-aos="fade-up" data-aos-duration="800" className={`${style} col-span-2`}>
                 <div className="flex items-center justify-between mb-4">
-                    <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msgLight}`}>Publication</h1>
+                    <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msg}`}>Publication</h1>
                     <a href={publication.link}>
-                        <div className={`${Colors["blue"].bg.msgLight} h-full text-xs text-white py-1 px-2 md:(px-3 py-2) rounded-full hover:scale-95 transform transition-all duration-200 ease-in-out font-normal`}>
+                        <div className={`${Colors["blue"].bg.msg} h-full text-xs text-white py-1 px-2 md:(px-3 py-2) rounded-full hover:scale-95 transform transition-all duration-200 ease-in-out font-normal`}>
                             ↓ Download</div>
                     </a>
                 </div>
@@ -298,10 +298,10 @@ const Overview = () => {
                 </div>
                 <div className="my-3">
                     {publication.tags.map((tag: any) =>
-                        <span className={`inline-block text-[9px] mr-1 md:(text-xs mb-1) ${Colors[tag.color].bg.light} ${Colors[tag.color].text.msgLight} px-2 py-1 rounded-full`} key={tag.name}>{tag.name.toUpperCase()}</span>
+                        <span className={`inline-block text-[9px] mr-1 md:(text-xs mb-1) ${Colors[tag.color].bg.normal} ${Colors[tag.color].text.msg} px-2 py-1 rounded-full`} key={tag.name}>{tag.name.toUpperCase()}</span>
                     )}
                 </div>
-                <div className={`${Colors["blue"].text.msgLight} inline-block mt-3`}>
+                <div className={`${Colors["blue"].text.msg} inline-block mt-3`}>
                     <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline-blue text-sm md:text-normal`}
                         after="content-↗"
                         href={publication.website} target="_blank" rel="noopener noreferrer">{`Learn more in our website `}</a>
@@ -328,8 +328,8 @@ const Skills = () => {
 const ProjectHero = () => {
     const project = me.projects[0]
     return (
-        <div className="relative flex flex-col items-center justify-center py-10 overflow-hidden bg-white md:pb-5">
-            <h1 data-aos="fade-up" className={`${Colors["purple"].text.msgLight} text-4xl lg:text-6xl mb-15 font-bold text-center text-stroke-sm text-stroke-purple-500 uppercase text-transparent write-vertical-right  absolute right-2 top-4 md:(right-5 top-10)`}>Project</h1>
+        <div className="relative flex flex-col items-center justify-center py-10 overflow-hidden bg-white md:pb-5" dark="bg-true-gray-900">
+            <h1 data-aos="fade-up" className={`${Colors["purple"].text.msg} text-4xl lg:text-6xl mb-15 font-bold text-center text-stroke-sm text-stroke-purple-500 uppercase text-transparent write-vertical-right  absolute right-2 top-4 md:(right-5 top-10)`}>Project</h1>
             <div data-aos="fade-up" className="mt-10 mb-4 shadow-md aspect-ratio w-15 xs:w-20 rounded-2xl" id="hero">
                 <Image className="rounded-2xl" src={project.icon} layout="responsive" width="100" height="100" alt={project.name} />
             </div>
@@ -361,11 +361,11 @@ const Project = () => {
             <CardLayout>
                 <div className="flex flex-col items-center justify-between md:flex-row">
                     <div className="flex flex-col justify-start h-70 md:h-120 md:m-4">
-                        <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["purple"].text.msgLight}`}>Project</h1>
+                        <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["purple"].text.msg}`}>Project</h1>
                         <div className="flex flex-col items-start justify-center h-full">
                             <div className="flex flex-row-reverse items-center gap-3 md:flex-col md:items-start">
                                 <div className="mb-4 aspect-ratio w-15 xs:w-20">
-                                    <div className="border-true-gray-100 border-1 rounded-xl lg:(rounded-2xl)  shadow-md">
+                                    <div className="border-true-gray-100 border-1 rounded-xl lg:(rounded-2xl) shadow-md" dark="border-true-gray-800">
                                         <Image src={project.icon} alt="pokemon" layout='responsive' width="100" height="100" />
                                     </div>
                                 </div>
@@ -385,7 +385,7 @@ const Project = () => {
                 </div>
             </CardLayout>
             <div data-aos="fade-up" className="flex justify-center">
-                <a className={`transition-all duration-200 ease-in-out transform ${Colors["purple"].text.msgLight} bg-white hover:text-white hover:bg-purple-500 border-2 border-purple-500 rounded-full`} href={me.social[0].url} target="_blank" rel="noopener noreferrer">
+                <a className={`transition-all duration-200 ease-in-out transform ${Colors["purple"].text.msg} bg-white hover:text-white hover:bg-purple-500 border-2 border-purple-500 rounded-full`} href={me.social[0].url} target="_blank" rel="noopener noreferrer" dark="bg-true-gray-900 hover:bg-purple-500">
                     <p className={`text-sm font-semibold inline-block text-center px-4 py-3`}>Explore More</p>
                 </a>
             </div>
@@ -401,7 +401,7 @@ const Project = () => {
 //             <h1 className={`text-4xl lg:text-6xl pb-4 font-bold text-center`}>Education 🎉</h1>
 //             <div className="grid flex-shrink grid-cols-1 gap-4 my-5 md:grid-cols-3">
 //                 {education.map((school: any, index: number) =>
-//                     <div className={`${Colors[school.color].bg.msgLight} p-7 rounded-3xl flex flex-col relative overflow-hidden justify-between max-w-75 mx-auto md:(mx-0 max-w-none)`} key={school.name}>
+//                     <div className={`${Colors[school.color].bg.msg} p-7 rounded-3xl flex flex-col relative overflow-hidden justify-between max-w-75 mx-auto md:(mx-0 max-w-none)`} key={school.name}>
 //                         <div className="flex items-center justify-between">
 //                             <p className="font-semibold text-white">{school.time}</p>
 //                             <div className="h-10 w-10 lg:(h-15 w-15)">
@@ -426,9 +426,9 @@ const Project = () => {
 //             <CardLayout>
 //                 {/* <img className="absolute -right-15 -bottom-15 " src="/static/images/wave.png" alt="wave" /> */}
 //                 <div className="flex items-center justify-between mb-4">
-//                     <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msgLight}`}>Publication</h1>
+//                     <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msg}`}>Publication</h1>
 //                     <a href={publication.link}>
-//                         <div className={`${Colors["blue"].bg.msgLight} h-full text-xs text-white py-1 px-2 md:(px-3 py-2) rounded-full hover:scale-95 transform transition-all duration-200 ease-in-out font-normal`}>
+//                         <div className={`${Colors["blue"].bg.msg} h-full text-xs text-white py-1 px-2 md:(px-3 py-2) rounded-full hover:scale-95 transform transition-all duration-200 ease-in-out font-normal`}>
 //                             ↓ Download</div>
 //                     </a>
 //                 </div>
@@ -443,10 +443,10 @@ const Project = () => {
 //                 </div>
 //                 <div className="my-3">
 //                     {publication.tags.map((tag: any) =>
-//                         <span className={`inline-block text-[9px] mr-1 md:(text-xs mb-1) ${Colors[tag.color].bg.light} ${Colors[tag.color].text.msgLight} px-2 py-1 rounded-full`} key={tag.name}>{tag.name.toUpperCase()}</span>
+//                         <span className={`inline-block text-[9px] mr-1 md:(text-xs mb-1) ${Colors[tag.color].bg.normal} ${Colors[tag.color].text.msg} px-2 py-1 rounded-full`} key={tag.name}>{tag.name.toUpperCase()}</span>
 //                     )}
 //                 </div>
-//                 <div className={`${Colors["blue"].text.msgLight} inline-block mt-3`}>
+//                 <div className={`${Colors["blue"].text.msg} inline-block mt-3`}>
 //                     <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline-blue text-sm md:text-normal`}
 //                         after="content-↗"
 //                         href={publication.website} target="_blank" rel="noopener noreferrer">{`Learn more in our website `}</a>
@@ -502,7 +502,7 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
 
                 </div> */}
             {/* </ListLayout> */}
-            {/* <div className={`${Colors["purple"].bg.msgLight}`}> */}
+            {/* <div className={`${Colors["purple"].bg.msg}`}> */}
             <ProjectHero />
             <ListLayout>
                 <div className="my-10">

@@ -9,10 +9,10 @@ const portraitPlaceholder = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAA
 export const WidgetMeSmall: FC = () => {
     return (
         <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100"
+            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900"
             // data-aos="fade-up"
             >
-                <div className="flex flex-col justify-between h-full bg-white shadow-sm p-3.5"
+                <div className="flex flex-col justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900"
                 //  data-aos="fade-up"
                 >
                     <Link href={"/me"} >
@@ -47,10 +47,10 @@ export const WidgetMeMedium: FC<{ fix?: boolean }> = ({ fix }) => {
 
     return (
         <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`}
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900"
             // data-aos="fade-up"
             >
-                <div className="flex flex-col justify-between h-full bg-white shadow-sm"
+                <div className="flex flex-col justify-between h-full bg-white shadow-sm" dark="bg-true-gray-900"
                 //  data-aos="fade-up"
                 >
                     <Link href={"/me"} >
@@ -65,7 +65,7 @@ export const WidgetMeMedium: FC<{ fix?: boolean }> = ({ fix }) => {
                             </div>
                         </a>
                     </Link>
-                    <div className="h-3/7 bg-true-gray-100">
+                    <div className="h-3/7 bg-true-gray-100"  dark="bg-true-gray-800">
                         <div className={`flex items-center justify-between p-3 ${fix ? "" : "lg:(px-4)"} h-full gap-1 overflow-scroll`}>
                             {links.map((link: LinkType, index: number) => (
                                 <a target="_blank" rel="noopener noreferrer" key={link.url} href={link.url} className={`rounded-lg lg:rounded-xl flex items-center font-medium text-white justify-center h-full bg-gradient-to-tr ${link.color} ${index === 0 ? "col-span-2 text-10px gap-0.7 px-2 lg:(text-sm gap-1)" : "aspect-square"} transform transition ease-in-out duration-200 hover:scale-95 `}>

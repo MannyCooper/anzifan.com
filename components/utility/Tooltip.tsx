@@ -17,7 +17,7 @@ export function Tooltip({ children, tooltipText }: any) {
             onMouseLeave={handleMouseLeave}
         >
             <div
-                className="absolute whitespace-no-wrap bg-gradient-to-r bg-white text-true-gray-500 px-3 py-1 rounded-2xl flex items-center transition-all shadow duration-200 right-0 top-full opacity-0 z-10"
+                className="absolute whitespace-no-wrap bg-gradient-to-r bg-white text-true-gray-500 px-3 py-1 rounded-2xl flex items-center transition-all shadow duration-200 right-0 top-full opacity-0 z-10" dark="bg-black"
                 ref={tipRef}
             >
                 {/* <div

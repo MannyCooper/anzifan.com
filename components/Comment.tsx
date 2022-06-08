@@ -1,18 +1,27 @@
 import Head from "next/head"
 import { Giscus } from '@giscus/react';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 const Comment = () => {
-
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
     useEffect(() => {
-        var twikoo = require('twikoo/dist/twikoo.min')
-        twikoo.getRecentComments({
-            envId: 'https://twikoo-vercel-rho.vercel.app',
-            el: '#tcomment'
-        }).then((res: any) => {
-            console.log(res)
-        })
-    })
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
+    // useEffect(() => {
+    //     var twikoo = require('twikoo/dist/twikoo.min')
+    //     twikoo.getRecentComments({
+    //         envId: 'https://twikoo-vercel-rho.vercel.app',
+    //         el: '#tcomment'
+    //     }).then((res: any) => {
+    //         console.log(res)
+    //     })
+    // })
 
     return (
         <>
@@ -37,7 +46,8 @@ const Comment = () => {
                     mapping="pathname"
                     reactionsEnabled="1"
                     emitMetadata="0"
-                    theme="light"
+                    // TODO: Follow color scheme truly
+                    theme="preferred_color_scheme"
                 />
                 {/* <div id="tcomment"></div> */}
             </div>

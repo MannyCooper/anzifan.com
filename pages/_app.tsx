@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import NextNprogress from 'nextjs-progressbar';
 import type { NextPage } from 'next'
 import { pageview } from '../lib/gtag'
+import { ThemeProvider } from 'next-themes'
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -48,7 +49,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page: any) => <BlogLayout>{page}</BlogLayout>);
 
   return (
-    <>
+    <ThemeProvider attribute="class">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>异次元の机智君</title>
@@ -62,7 +63,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
       {getLayout(
         <Component {...pageProps} />
       )}
-    </>
+    </ThemeProvider>
   )
 }
 

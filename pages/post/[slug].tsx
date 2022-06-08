@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from "next"
 import Image from "next/image";
 import { ParsedUrlQuery } from "querystring"
 import { getAllBlocks, getDatabase, getPage } from "../../lib/notion"
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { renderNotionBlock } from "../../components/NotionBlockRenderer"
 import ContentLayout, { CoverLayout } from "../../components/layout/ContentLayout"
 import Head from "next/head"
@@ -24,8 +24,9 @@ import { Media, MediaContextProvider } from "../../components/utility/Breakpoint
 import { WidgetMeMedium, WidgetMeSmall } from "../../components/widget/WidgetMe";
 import { WidgetOverViewMedium, WidgetOverViewSmall } from "../../components/widget/WidgetOverview";
 import ListLayout from "../../components/layout/ListLayout";
+import ThemedImage from "../../components/ThemedImage";
 
-const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
+const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {    
     if (!page || !blocks) {
         return <>
             <Head>
@@ -41,27 +42,23 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
                     <div>
                         <Link href="/category/[{Category}]" as={`/category/${page.category.name}`} passHref>
-                            <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.light} `}>{page.category.name}</p>
+                            <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
                         </Link>
-                        <Moment className="block mt-2 text-sm font-semibold text-true-gray-600" date={page.date} fromNow
+                        <Moment className="block mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400" date={page.date} fromNow
                             // format="MMM DD, yy"
                             format="yyyy 年 MM 月 DD 日"
                             local />
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
-                    <p className="mb-4 text-xl font-medium text-true-gray-600 lg:text-2xl">
+                    <p className="mb-4 text-xl font-medium text-true-gray-600 lg:text-2xl" dark="text-true-gray-400">
                         {page.excerpt}
                     </p>
                     <Share />
                 </header>
             </ContentLayout>
             <CoverLayout>
-                <div className="md:rounded-3xl">
-                    <Image src={page.cover.light} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={page.title}
-                        // onLoadingComplete={handleLoad}
-                        placeholder="blur"
-                        blurDataURL={page.cover.blurLight}
-                        className="relative z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" data-aos="fade-up" data-aos-duration="500" />
+                <div className="md:rounded-3xl relative w-full h-full" data-aos="fade-up" data-aos-duration="500">
+                    <ThemedImage className="z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" post={page}/>
                 </div>
             </CoverLayout>
             <ContentLayout>
@@ -73,24 +70,24 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                 })}
                 {/* </div> */}
                 {/* Tags */}
-                <div className="flex w-full space-x-2 overflow-auto flex-nowrap">
+                <div className="flex w-full space-x-2 overflow-auto flex-nowrap items-center mt-8">
                     <TagsIcon />
-                    {page.tags.map((tag: any) =>  
-                    <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
-                        <a href={`/tag/${tag.name}`}>
-                        <div className={`${Colors[tag.color]?.bg.msgLight ?? Colors['gray'].bg.msgLight} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
-                            {tag.name}
-                        </div>
-                        </a>
-                    </Link>
+                    {page.tags.map((tag: any) =>
+                        <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
+                            <a href={`/tag/${tag.name}`}>
+                                <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
+                                    {tag.name}
+                                </div>
+                            </a>
+                        </Link>
                     )}
                 </div>
-                <Licensing page={page} />
-                <Pagination pagination={pagination} ></Pagination>
-                {/* <Reaction /> */}                          
+                <Licensing page={page} data-aos="fade-up" data-aos-duration="500" />
+                <Pagination pagination={pagination} data-aos="fade-up" data-aos-duration="500"></Pagination>
+                {/* <Reaction /> */}
             </ContentLayout>
             <ContentLayout>
-            <MediaContextProvider >
+                <MediaContextProvider >
                     <Media greaterThanOrEqual="sm" className="grid grid-cols-2 md:grid-cols-2 gap-4">
                         {/* <WidgetMeSmall />
                         <WidgetOverViewSmall posts=1{posts} /> */}
@@ -98,7 +95,7 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                         <WidgetOverViewMedium posts={posts} fix={true} />
                     </Media>
                     <Media lessThan="sm" className="grid grid-cols-2 gap-2">
-                    {/* <WidgetMeMedium />
+                        {/* <WidgetMeMedium />
                         <WidgetOverViewMedium posts={posts} /> */}
                         <WidgetMeSmall />
                         <WidgetOverViewSmall posts={posts} />
@@ -106,7 +103,7 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                 </MediaContextProvider>
             </ContentLayout>
             <ContentLayout>
-                <Comment />     
+                <Comment />
             </ContentLayout>
         </>
     )
@@ -127,7 +124,7 @@ interface Props extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const { slug } = params as Props
-    const db = await getDatabase(slug)    
+    const db = await getDatabase(slug)
     // const posts = await getDatabase()
     // const post = db[0].id
     // const page = await getPage(post)
@@ -136,18 +133,36 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // TODO: pagination causes the page's data too big(135kb), may be using search or changing it to a recommendation list
     const pageIndex = db.findIndex(p => p.slug === slug)
     const page = db[pageIndex]
+    const prev = db[pageIndex - 1] || null
+    const next = db[pageIndex + 1] || null
+
+    if (prev) {
+        prev.cover.blurLight = (await getPlaiceholder(prev.cover.light, {
+            size: 10,
+        })).base64
+        prev.cover.blurDark = (await getPlaiceholder(prev.cover.dark, {
+            size: 10,
+        })).base64
+    }
+
+    if (next) {
+        next.cover.blurLight = (await getPlaiceholder(next.cover.light, {
+            size: 10,
+        })).base64
+        next.cover.blurDark = (await getPlaiceholder(next.cover.dark, {
+            size: 10,
+        })).base64
+    }
 
     const pagination: any = {
-        prev: pageIndex - 1 >= 0 ? db[pageIndex - 1] : null,
-        next: pageIndex + 1 < db.length ? db[pageIndex + 1] : null
+        prev: pageIndex - 1 >= 0 ? prev : null,
+        next: pageIndex + 1 < db.length ? next : null
     }
 
     if (!page) return { props: {}, revalidate: 10 }
 
 
     if (page) {
-        // page.cover.blurLight = (await getPlaiceholder(page.cover.light)).css
-        // page.cover.blurDark = (await getPlaiceholder(page.cover.dark)).css
         page.cover.blurLight = (await getPlaiceholder(page.cover.light, {
             size: 10,
         })).base64
@@ -222,7 +237,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             })
     )
 
-    return { props: { page, blocks: blocksWithChildren, pagination, posts : db }, revalidate: 10 }
+    return { props: { page, blocks: blocksWithChildren, pagination, posts: db }, revalidate: 10 }
 }
 
 (PostPage as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {

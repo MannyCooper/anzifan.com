@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import Image from "next/image"
 import { links, LinkType } from "../../config/links"
 import {
@@ -22,6 +22,7 @@ import { GetStaticProps } from "next";
 import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
 import useSWRImmutable from 'swr/immutable';
+import { useTheme } from "next-themes";
 
 ChartJS.register(
     CategoryScale,
@@ -47,10 +48,10 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
 
     return (
         <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100"
+            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900"
             // data-aos="fade-up"
             >
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5 "
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5 " dark="bg-true-gray-900"
                 // data-aos="fade-up"         
                 >
                     <div className="flex flex-col justify-between">
@@ -58,8 +59,8 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
                             👋
                         </div>
                         <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
-                            <p className={`${Colors["orange"]?.text.light} line-clamp-1`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.light} line-clamp-1`}>{tagsAmount} 个话题</p>
+                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
+                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
                             <OverviewPvAll />
                         </div>
                     </div>
@@ -101,9 +102,18 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
     let todayMonth = new Date().getMonth();
     const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
 
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
 
     const ticksColor = monthLabel.map((label, index) =>
-        parseInt(label) >= todayMonth + 1 && index != 23 ? "#bababa" : "#000000"
+        parseInt(label) >= todayMonth + 1 && index != 23 ? resolvedTheme === "dark" ? "#434343":"#bababa" : resolvedTheme === "dark" ? "#ffffff":"#000000"
     )
 
     const postsData: any = {
@@ -172,10 +182,10 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
 
     return (
         <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`}
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900"
             // data-aos="fade-up"
             >
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)"
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900"
                 // data-aos="fade-up"
                 >
                     <div className="flex flex-col justify-between">
@@ -183,8 +193,8 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                             👋
                         </div>
                         <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
-                            <p className={`${Colors["orange"]?.text.light}`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.light}`}>{tagsAmount} 个话题</p>
+                            <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
+                            <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                             <OverviewPvAll />
                         </div>
                     </div>
@@ -223,7 +233,8 @@ const OverviewPv = () => {
             </Tooltip>
         )
     }
-    if (!pvData) {
+
+    if (!pvData || !pvData["pageHistory"]) {
         return (
             <div className="animate-pulse">
                 <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
@@ -234,6 +245,7 @@ const OverviewPv = () => {
     }
 
     pv = pvData["pageHistory"]
+
     return (
 
         <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
@@ -255,7 +267,7 @@ const OverviewUv = () => {
         )
     }
 
-    if (!uvData) {
+    if (!uvData || !uvData["userHistory"]) {
         return (
             <div className="animate-pulse">
                 <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
@@ -276,12 +288,12 @@ const OverviewUv = () => {
 
 const OverviewPvAll = () => {
     const { data: pvAllData, error: pvAllError } = useSWRImmutable('/api/page-views/all', fetcher)
-    if (pvAllError) return <p className={`${Colors["blue"]?.text.light} line-clamp-1`}>25,223 次访问</p>
-    if (!pvAllData) return <p className={`${Colors["blue"]?.text.light} animate-pulse line-clamp-1`}>- 次访问</p>
+    if (pvAllError) return <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>25,223 次访问</p>
+    if (!pvAllData) return <p className={`${Colors["blue"]?.text.normal} animate-pulse line-clamp-1`}>- 次访问</p>
     const pvAmount = pvAllData["pageViews"] || "-"
 
     return (
-        <p className={`${Colors["blue"]?.text.light} line-clamp-1`}>{pvAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 次访问</p>
+        <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{pvAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 次访问</p>
     )
 }
 
