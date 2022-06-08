@@ -17,7 +17,7 @@ const CateCard = ({ name, color, count }: { name: string, color: string, count: 
                 <div className={`aspect-square ${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} rounded-xl p-3 md:p-4 text-white relative z-0 font-semibold`} before="content-0 text-transparent absolute h-full w-full top-0 left-0 z-10 bg-gradient-to-l from-white opacity-40 to-transparent rounded-xl" dark="before:(from-black)">
                     <div className="flex flex-row items-center justify-between text-normal md:text-lg lg:text-xl">
                         <p className="z-20">{name}</p>
-                        <p className={`bg-white z-20 ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} px-2 text-center rounded-full`} dark="bg-black">{count}</p>
+                        <p className={`bg-white z-20 ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} px-2 text-center rounded-full`}>{count}</p>
                     </div>
                     <p className={`p-3 md:p-4 text-6xl md:text-7xl lg:text-8xl font-semibold absolute left-0 bottom-0 ${Colors[color]?.bg.normal ?? Colors['gray'].bg.normal} bg-clip-text text-transparent opacity-20 bg-gradient-to-l from-white/20 w-full whitespace-nowrap`} dark="from-black/20">{name}</p>
                 </div>

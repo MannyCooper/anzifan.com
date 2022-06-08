@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react"
+import { useTheme } from "next-themes";
 
 const CardLayout = ({ children }: any) => {
     return (
@@ -63,14 +64,42 @@ const CardLayout = ({ children }: any) => {
 //     )
 // }
 
+const LocationMap = () => {
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
+    const emptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+    let src
+    switch (resolvedTheme) {
+        case 'light':
+            src = "/static/images/map_light.png"
+            break
+        case 'dark':
+            src = "/static/images/map_dark.png"
+            break
+        default:
+            src = emptyImage
+            break
+    }
+
+    return <Image className="absolute left-0 z-0 -top-1/4 sm:-top-3/5 lg:-top-9/10" layout='fill' objectFit="cover" src={src} alt="map" />
+}
+
 const Overview = () => {
     const style = "bg-white rounded-3xl p-4 xs:p-4.5 sm:p-6 md:p-8 min-h-25 sm:min-h-37 flex flex-col justify-between transform rotate-0 overflow-hidden dark:bg-true-gray-900"
     const social = me.social
     const publication = me.publications[0]
     const skills = me.skills
     const education = me.education
-
     const [more, setMore] = useState(false);
+
     const handleMore = () => {
         setMore(!more);
     };
@@ -92,7 +121,7 @@ const Overview = () => {
                 {/* </div> */}
                 {/* <img className="h-full rounded-full" src="/static/images/portrait.png" alt="portrait" /> */}
             </div>
-            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="200" className={`${style} row-span-2 text-white bg-gradient-to-br from-green-400 to-blue-500`}>
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" className={`${style} row-span-2 text-white bg-gradient-to-br from-green-400 to-blue-500`}>
                 <p className="text-xs font-semibold xs:text-lg md:text-xl">
                     Intersted in</p>
                 <div className="text-center">
@@ -129,7 +158,7 @@ const Overview = () => {
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="200" className={`${style} text-center`}>
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" className={`${style} text-center`}>
                 <p className="text-sm font-semibold text-left xs:text-lg sm:text-xl md:text-3xl lg:text-4xl">
                     Love <span className="text-white text-stroke-1 text-stroke-orange-500">Logical</span>
                 </p>
@@ -139,12 +168,12 @@ const Overview = () => {
                 </p>
                 {/* {` and `} */}
             </div>
-            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="400" className={`${style} overflow-hidden !justify-end relative`}>
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" className={`${style} overflow-hidden !justify-end relative`}>
                 {/* p-4 xs:p-4.5 sm:p-6 md:p-8  */}
-                <p className="z-10 py-2 px-4 xs:px-4.5 sm:px-3 md:px-6 -m-4 xs:-m-4.5 sm:-m-6 md:-m-8 text-xs sm:text-lg font-semibold opacity-90 bg-gray-200 md:text-xl">
-                    <span className="text-gray-600">Located in</span> Seattle, WA
+                <p className="z-10 py-2 px-4 xs:px-4.5 sm:px-3 md:px-6 -m-4 xs:-m-4.5 sm:-m-6 md:-m-8 text-xs sm:text-lg font-semibold opacity-90 bg-gray-200 md:text-xl" dark="bg-gray-700">
+                    <span className="text-gray-600" dark="text-gray-400">Located in</span> Seattle, WA
                 </p>
-                <Image className="absolute left-0 z-0 -top-1/4 sm:-top-3/5 lg:-top-9/10" layout='fill' objectFit="cover" src="/static/images/map.png" alt="map" />
+                <LocationMap />
             </div>
             <div data-aos="fade-up" data-aos-duration="800" className={`${style} col-span-2 gap-3  relative !flex-row items-center`}>
                 <p className="text-sm font-semibold text-left xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl z-10 whitespace-nowrap">
@@ -230,7 +259,7 @@ const Overview = () => {
                     </div> */}
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800"  data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden min-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden min-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
                 <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8 text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1`}>
                     Educations
                 </p>
@@ -467,7 +496,7 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
         const hero = document.getElementById("hero")
         const imagesBounding = document.getElementById("astraios-images")
         const images = document.querySelectorAll("#astraios-images > :nth-child(odd)")
-        
+
         images.forEach((image: any) => {
             if (hero!.getBoundingClientRect().top - navBar!.clientHeight <= 0) {
                 image.style.transform = `translateY(-${(window.scrollY - imagesBounding!.getBoundingClientRect().bottom) / 40}px)`
@@ -482,7 +511,7 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
                 <div data-aos="fade-up" className="flex flex-col items-center messages">
                     <div className="rounded-full aspect-square h-30 xs:h-35 md:h-40 my-4 xs:my-8 md:mt-10 relative overflow-hidden">
                         <Image src="/static/images/portrait.png" layout='fill' objectFit="cover" alt="Portrait" />
-                    </div>                    
+                    </div>
                     <h1 className="pb-4 text-4xl font-bold text-center md:text-6xl">About Me 🌍</h1>
                 </div>
             </ListLayout>
