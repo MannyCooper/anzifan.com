@@ -86,7 +86,7 @@ const Navbar = () => {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               >
-                <Menu.Items className="absolute right-0 w-40 p-2 mt-5 origin-top-right bg-white shadow-md rounded-3xl ring-0 mobile-menu focus:outline-none">
+                <Menu.Items className="absolute right-0 w-40 p-2 mt-5 origin-top-right bg-white/70 shadow-md rounded-3xl ring-0 mobile-menu focus:outline-none backdrop-filter backdrop-blur-lg backdrop-saturate-200" dark="bg-true-gray-900/70">
                   {navigations.map((n, i) => (
                     <div key={i}>
                       <Menu.Item>
