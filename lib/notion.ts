@@ -70,6 +70,8 @@ export const getDatabase = async (slug?: string) => {
             const excerpt = properties.Excerpt.type === "rich_text" && properties.Excerpt.rich_text[0]?.plain_text
             const tip = properties.Tip.type == "rich_text" && properties.Tip.rich_text[0]?.plain_text
             const sspai = properties.SSPAI.type == "url" && properties.SSPAI.url
+            const originalCover = properties.OriginalCover.type == "checkbox" && properties.OriginalCover.checkbox
+
             return {
                 id: result.id,
                 slug: slug || "",
@@ -82,7 +84,8 @@ export const getDatabase = async (slug?: string) => {
                 series: series || null,
                 excerpt: excerpt || "",
                 tip: tip || "",
-                sspai: sspai || ""
+                sspai: sspai || "",
+                originalCover: originalCover || false,
             } as unknown as Post
         })
 }

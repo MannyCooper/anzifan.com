@@ -38,8 +38,8 @@ function generateCalloutValue(emoji: any, color: string, texts: any[]) {
 const FrontMessage: FC<{ post: Post }> = ({ post }) => {
     const updateDate = moment(post.updateDate)
     const createDate = moment(post.date)
-    const updateDaysPassed = moment().diff(updateDate, "days")
     const isOldBlog = createDate.isBefore(moment([2022, 5, 7]))
+    const updateDaysPassed = isOldBlog ? moment().diff(createDate, "days") : moment().diff(updateDate, "days")
 
     const oldBlogMessage = generateCalloutValue("⚠️", "yellow_background", [
         { content: "This post is from the " },

@@ -26,8 +26,10 @@ import { WidgetOverViewMedium, WidgetOverViewSmall } from "../../components/widg
 import ListLayout from "../../components/layout/ListLayout";
 import ThemedImage from "../../components/ThemedImage";
 import FrontMessage from "../../components/FrontMessage";
+import { faPalette } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {    
+const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
     if (!page || !blocks) {
         return <>
             <Head>
@@ -59,30 +61,38 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
             </ContentLayout>
             <CoverLayout>
                 <div className="md:rounded-3xl relative w-full h-full" data-aos="fade-up" data-aos-duration="500">
-                    <ThemedImage className="z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" post={page}/>
+                    <ThemedImage className="z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" post={page} />
                 </div>
             </CoverLayout>
             <ContentLayout>
-                {/* <div data-aos="fade-down"> */}
                 <FrontMessage post={page} />
                 {blocks.map(block => {
                     return (
                         <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
                     )
                 })}
-                {/* </div> */}
-                {/* Tags */}
-                <div className="flex w-full space-x-2 overflow-auto flex-nowrap items-center mt-8">
-                    <TagsIcon />
-                    {page.tags.map((tag: any) =>
-                        <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
-                            <a href={`/tag/${tag.name}`}>
-                                <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
-                                    {tag.name}
-                                </div>
-                            </a>
-                        </Link>
-                    )}
+                <div className="flex flex-col md:flex-row-reverse mt-8 justify-between md:items-center space-y-4 w-full">
+                    <a href="mailto:541297173@qq.com">
+                        <div className="whitespace-nowrap  rounded-full px-2 py-1 space-x-2 bg-true-gray-100 text-true-gray-800 text-sm inline-block" dark="bg-true-gray-800 text-true-gray-100">
+                            <FontAwesomeIcon icon={faPalette} />
+                            <span>原创封面图，请勿盗用</span>
+                        </div>
+                    </a>
+                    {/* Tags */}
+                    <div className="md:w-2/3 flex items-center space-x-2">
+                        <TagsIcon className="pr-4 z-10" />
+                        <div className="flex space-x-2 items-center overflow-scroll flex-nowrap z-0">
+                            {page.tags.map((tag: any) =>
+                                <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
+                                    <a href={`/tag/${tag.name}`}>
+                                        <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
+                                            {tag.name}
+                                        </div>
+                                    </a>
+                                </Link>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <Licensing page={page} data-aos="fade-up" data-aos-duration="500" />
                 <Pagination pagination={pagination} data-aos="fade-up" data-aos-duration="500"></Pagination>

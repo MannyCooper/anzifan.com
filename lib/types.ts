@@ -11,6 +11,7 @@ export interface Post {
     excerpt: string,
     tip: string,
     sspai: string,
+    originalCover: boolean,
 };
 
 export type Tag = {
