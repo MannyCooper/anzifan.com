@@ -71,13 +71,14 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                         <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
                     )
                 })}
-                <div className="flex flex-col md:flex-row-reverse mt-8 justify-between md:items-center space-y-4 w-full">
+                <div className={`flex flex-col mt-8 justify-between ${page.OriginalCover ? "md:flex-row-reverse" :""} md:items-center space-y-4 w-full`}>
+                    { page.OriginalCover ? 
                     <a href="mailto:541297173@qq.com">
                         <div className="whitespace-nowrap  rounded-full px-2 py-1 space-x-2 bg-true-gray-100 text-true-gray-800 text-sm inline-block" dark="bg-true-gray-800 text-true-gray-100">
                             <FontAwesomeIcon icon={faPalette} />
                             <span>原创封面图，请勿盗用</span>
                         </div>
-                    </a>
+                    </a> : null}
                     {/* Tags */}
                     <div className="md:w-2/3 flex items-center space-x-2">
                         <TagsIcon className="pr-4 z-10" />
