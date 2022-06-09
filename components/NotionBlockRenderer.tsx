@@ -72,7 +72,7 @@ export function renderNotionBlock(block: any) {
 
         case 'toggle':
             return (
-                <details className="bg-light-400 rounded-3xl pl-4 py-1">
+                <details className="bg-light-400 rounded-3xl pl-4 py-1" dark="bg-dark-400">
                     <summary>
                         <NotionText text={value.text} />
                     </summary>

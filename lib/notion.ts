@@ -60,8 +60,8 @@ export const getDatabase = async (slug?: string) => {
             const updateDate = properties.UpdateDate.type === "last_edited_time" && properties.UpdateDate.last_edited_time
 
             const undefinedCover = "https://cdn.dribbble.com/users/3167939/screenshots/10422336/media/b618a0e73996c3b24b58b2db1c881ee3.png"
-            const cover_light = properties.Cover.type === "rich_text" && properties.Cover.rich_text[0]?.plain_text || undefinedCover
-            const cover_dark = properties.Cover_dark.type === "rich_text" && properties.Cover_dark.rich_text[0]?.plain_text || cover_light
+            const cover_light = properties.Cover.type === "url" && properties.Cover.url || undefinedCover
+            const cover_dark = properties.Cover_dark.type === "url" && properties.Cover_dark.url || cover_light
             const cover = { light: cover_light, dark: cover_dark }
 
             const category = properties.Category.type === "select" && { name: properties.Category.select?.name, color: properties.Category.select?.color }
@@ -69,7 +69,7 @@ export const getDatabase = async (slug?: string) => {
             const series = properties.Series.type === "select" && properties.Series.select?.name !== undefined && { name: properties.Series.select?.name, color: properties.Series.select?.color }
             const excerpt = properties.Excerpt.type === "rich_text" && properties.Excerpt.rich_text[0]?.plain_text
             const tip = properties.Tip.type == "rich_text" && properties.Tip.rich_text[0]?.plain_text
-            const sspai = properties.SSPAI.type == "checkbox" && properties.SSPAI.checkbox
+            const sspai = properties.SSPAI.type == "url" && properties.SSPAI.url
             return {
                 id: result.id,
                 slug: slug || "",
@@ -82,7 +82,7 @@ export const getDatabase = async (slug?: string) => {
                 series: series || null,
                 excerpt: excerpt || "",
                 tip: tip || "",
-                sspai: sspai || false
+                sspai: sspai || ""
             } as unknown as Post
         })
 }

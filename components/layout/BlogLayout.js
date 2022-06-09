@@ -4,10 +4,26 @@ import Footer from '../Footer'
 export default function BlogLayout({ children }) {
   return (
     <>
-      <div className="min-h-screen bg-true-gray-50" dark="bg-black">
+      <div className="bg-true-gray-50" dark="bg-black">
         <Navbar />
         <main>{children}</main>
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export function BlogLayoutPure({ children }) {
+  return (
+    <>
+      <div className="bg-white flex flex-col justify-start min-h-screen" dark="bg-black">
+        <Navbar />
+        <main>{children}</main>
+        <div className="mt-auto">
+          <Footer />
+        </div>
       </div>
     </>
   )

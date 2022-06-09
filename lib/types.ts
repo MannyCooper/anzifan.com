@@ -10,7 +10,7 @@ export interface Post {
     series: { name: string, color: string },
     excerpt: string,
     tip: string,
-    sspai: boolean,
+    sspai: string,
 };
 
 export type Tag = {

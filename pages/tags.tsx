@@ -1,9 +1,12 @@
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import { ReactElement } from "react";
+import { BlogLayoutPure } from "../components/layout/BlogLayout";
 import ListLayout from "../components/layout/ListLayout";
 import { Colors } from "../lib/colors";
 import { getDatabase } from "../lib/notion";
 import { Tag } from "../lib/types";
+import { NextPageWithLayout } from "./_app";
 
 
 const TagCard = ({ name, color, count }: { name: string, color: string, count: number }) => {
@@ -60,5 +63,14 @@ export const getStaticProps: GetStaticProps = async () => {
         revalidate: 60 * 60,
     }
 }
+
+(Tags as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {
+    return (
+        <BlogLayoutPure>
+            {page}
+        </BlogLayoutPure>
+    )
+}
+
 
 export default Tags

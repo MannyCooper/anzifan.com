@@ -1,9 +1,12 @@
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import { ReactElement } from "react";
+import { BlogLayoutPure } from "../components/layout/BlogLayout";
 import ListLayout from "../components/layout/ListLayout";
 import { Colors } from "../lib/colors";
 import { getDatabase } from "../lib/notion";
 import { Tag } from "../lib/types";
+import { NextPageWithLayout } from "./_app";
 
 
 const CateCard = ({ name, color, count }: { name: string, color: string, count: number }) => {
@@ -14,12 +17,13 @@ const CateCard = ({ name, color, count }: { name: string, color: string, count: 
                     <p>{name}</p>
                     <p className={`bg-white ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} text-lg px-2 h-full text-center rounded-full`}>{count}</p>
                 </div> */}
-                <div className={`aspect-square ${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} rounded-xl p-3 md:p-4 text-white relative z-0 font-semibold`} before="content-0 text-transparent absolute h-full w-full top-0 left-0 z-10 bg-gradient-to-l from-white opacity-40 to-transparent rounded-xl" dark="before:(from-black)">
+                <div className={`aspect-square ${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} rounded-xl p-3 md:p-4 text-white relative z-0 font-semibold overflow-hidden`} before="content-0 text-transparent absolute h-full w-full top-0 left-0 z-10 bg-gradient-to-l from-white opacity-50 to-transparent rounded-xl"
+                dark="before:from-black">
                     <div className="flex flex-row items-center justify-between text-normal md:text-lg lg:text-xl">
                         <p className="z-20">{name}</p>
                         <p className={`bg-white z-20 ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} px-2 text-center rounded-full`}>{count}</p>
                     </div>
-                    <p className={`p-3 md:p-4 text-6xl md:text-7xl lg:text-8xl font-semibold absolute left-0 bottom-0 ${Colors[color]?.bg.normal ?? Colors['gray'].bg.normal} bg-clip-text text-transparent opacity-20 bg-gradient-to-l from-white/20 w-full whitespace-nowrap`} dark="from-black/20">{name}</p>
+                    <p className={`px-3 py-2 md:(px-4 py-3) text-8xl md:text-8xl font-semibold absolute left-0 bottom-0  ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} filter brightness-95 w-full whitespace-nowrap z-0`}>{name}</p>
                 </div>
             </a>
         </Link>
@@ -67,6 +71,14 @@ export const getStaticProps: GetStaticProps = async () => {
         },
         revalidate: 60 * 60,
     }
+}
+
+(Cates as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {
+    return (
+        <BlogLayoutPure>
+            {page}
+        </BlogLayoutPure>
+    )
 }
 
 export default Cates

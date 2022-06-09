@@ -24,7 +24,7 @@ const Footer = () => {
     ]
     return (
         <>
-            <footer className="relative bg-true-gray-50" dark="bg-true-gray-800">
+            <footer className="relative bg-true-gray-100" dark="bg-true-gray-800">
                 <div className="flex flex-col px-6 mx-auto items-left lg:px-11 lg:w-screen-lg">
                     <nav className="py-4 flex justify-between items-center">
                         <Link href='/'>
@@ -48,6 +48,7 @@ const Footer = () => {
                                 </div>
                                 <p className="group">Design & Build with <span className="group-hover:text-red-400 transition-colors duration-500 ease-in-out">❤</span> by <a className="text-true-gray-600 hover:underline" href="https://github.com/MannyCooper/anzifan.com" target="_blank" rel="noopener noreferrer" dark="text-true-gray-400">MannyCooper</a></p>
                             </div>
+                            <p><a className="hover:underline" href="https://anzifan-old.vercel.app" target="_blank" rel="noopener noreferrer">Old Blog</a></p>
                         </div>
                         <p className="text-xs flex justify-between">
                             <span>

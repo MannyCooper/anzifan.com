@@ -8,7 +8,7 @@ import { Colors } from "../lib/colors"
 // import { useState } from "react";
 import CategoriesIcon from '../assets/categories.svg'
 import PostMore from "./PostMore";
-import { useTheme } from 'next-themes'
+import ThemedImage from "./ThemedImage";
 
 interface PostListProps {
   posts: Post[],
@@ -18,8 +18,6 @@ interface PostListProps {
 }
 
 const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count?: number }> = ({ posts, filter, color, count }: PostListProps) => {
-
-  const { resolvedTheme } = useTheme()
 
   const mainPosts = posts.slice(0, 9)
   const morePosts = posts.slice(9, 17)
@@ -91,25 +89,7 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
           </h1>
           <div className="grid grid-cols-6 gap-6.5 lg:gap-10">
             {mainPosts.map((post: Post, index: Number) => {
-              const size = itemSizeSwitch(index)
-              const emptyImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-              let src
-              let blurSrc
-              switch (resolvedTheme) {
-                case 'light':
-                  src = post.cover.light
-                  blurSrc = post.cover.blurLight
-                  break
-                case 'dark':
-                  src = post.cover.dark
-                  blurSrc = post.cover.blurDark
-                  break
-                default:
-                  src = emptyImage
-                  blurSrc = emptyImage
-                  break
-              }
-            
+              const size = itemSizeSwitch(index)              
               return (
                 <div key={post.id} className={`${size.cardSize}`}
                   data-aos="fade-up"
@@ -120,11 +100,7 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
                       <div className={`bg-white rounded-3xl overflow-hidden shadow-lg md:shadow-none shadow-true-gray-200 ${size.cardSize} flex flex-col group transition duration-500 ease-in-out transform-gpu mobile-hover:hover:scale-95
                     md:hover:shadow-lg hover:rotate-0 hover:active:scale-95`} dark="bg-true-gray-900 shadow-none">
                         <header className={`relative ${size.imgSize} duration-500 ease-in-out md:(filter group-hover:brightness-90) transition`}>
-                          <Image src={src} quality={100} layout="fill" objectFit="cover" sizes="100%" alt={post.title}
-                            // onLoadingComplete={handleLoad}
-                            placeholder="blur"
-                            blurDataURL={blurSrc}
-                            className="transition-all duration-500 ease-in-out opacity-100 md:(group-hover:scale-105 group-hover:opacity-90) transform-gpu" />
+                          <ThemedImage post={post} quality={100} className="transition-all duration-500 ease-in-out opacity-100 md:(group-hover:scale-105 group-hover:opacity-90) transform-gpu" />
                         </header>
                         <div className="flex flex-col justify-between flex-1 p-6">
                           <article

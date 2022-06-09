@@ -75,6 +75,7 @@ export default defineConfig({
       backgroundImage: theme => ({
         'underline-pink': 'linear-gradient(#ff375f, #ff375f), linear-gradient(transparent, transparent)',
         'underline-blue': 'linear-gradient(rgb(59, 130, 246), rgb(59, 130, 246)), linear-gradient(transparent, transparent)',
+        'underline': 'linear-gradient(CurrentColor, CurrentColor), linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))'
       }),
     },
   },

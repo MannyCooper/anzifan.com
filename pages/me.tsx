@@ -22,48 +22,6 @@ const CardLayout = ({ children }: any) => {
     )
 }
 
-// const OverviewOld = () => {
-//     const style = "inline-block py-1.5 px-3 rounded-3xl text-sm md:text-lg font-normal bg-[#E9E9EB]"
-//     return (
-//         <>
-//         <div className="px-4 ">
-//             {/* <CardLayout> */}
-//             <div className="flex flex-col items-start gap-1">
-//                 <div className={style}>Hey there 👋</div>
-//                 <div className={style}>{`I'm Zifan An`}</div>
-//                 <div className={style}>{`I'm a Developer, a Designer, a Gamer, and an App Reviewer`}</div>
-//                 <div className={style}>{`Intersted in Web & Mobile Development, Machine Learning, and any other interesting or challenging technology.`}</div>
-//                 <div className={style}>
-//                     Love logical and beautiful things
-//                 </div>
-//                 <div className={style}>
-//                     Located in Seattle, WA
-//                 </div>
-//                 <div className={style}>
-//                     Please Contact me on:
-//                 </div>
-//                 <div className={`${style} relative underline`}>
-//                     <a href="mailto: 541297173@qq.com">541297173@qq.com</a>
-//                     <img className="absolute -left-2.1 md:-left-2.5 bottom-0 w-4.5 md:w-5" src="/static/images/corner.svg" alt="corner" />
-//                 </div>
-//             </div>
-//             {/* <div>
-//                 Developer, Designer, Gamer, and App Reviewer
-//                 <br />
-//                 Intersted in Web & Mobile Development, Machine Learning, and any other interesting or challenging technology.
-//                 <br />
-//                 Love logical and beautiful things
-//                 <br />
-//                 Located in Seattle, WA
-//                 <br />
-//                 Contact me: 541297173@qq.com
-//             </div> */}
-//             {/* </CardLayout> */}
-//         </div>
-//         </>
-//     )
-// }
-
 const LocationMap = () => {
     const { resolvedTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
@@ -278,15 +236,15 @@ const Overview = () => {
                         <div className="bg-true-gray-300 w-full h-1.5 relative" >
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
                                 <div className="col-span-5 flex flex-col gap-1 lg:gap-2">
-                                    <a className="hover:opacity-80" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
+                                    <a className="filter hover:brightness-110" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-0 text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
                                     </a>
-                                    <a className="hover:opacity-80" href="https://www.nyit.edu/" target="_blank" rel="noopener noreferrer">
+                                    <a className="filter hover:brightness-110" href="https://www.nyit.edu/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
-                                <a className="hover:opacity-80 col-span-3" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
+                                <a className="filter hover:brightness-130 col-span-3" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
                                     <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
@@ -422,69 +380,6 @@ const Project = () => {
     )
 }
 
-// const Education = () => {
-//     const education = me.education
-//     return (
-//         <>
-//             {/* <CardLayout> */}
-//             <h1 className={`text-4xl lg:text-6xl pb-4 font-bold text-center`}>Education 🎉</h1>
-//             <div className="grid flex-shrink grid-cols-1 gap-4 my-5 md:grid-cols-3">
-//                 {education.map((school: any, index: number) =>
-//                     <div className={`${Colors[school.color].bg.msg} p-7 rounded-3xl flex flex-col relative overflow-hidden justify-between max-w-75 mx-auto md:(mx-0 max-w-none)`} key={school.name}>
-//                         <div className="flex items-center justify-between">
-//                             <p className="font-semibold text-white">{school.time}</p>
-//                             <div className="h-10 w-10 lg:(h-15 w-15)">
-//                                 <Image src={school.logo} layout="responsive" alt={school.name} width="100" height="100" />
-//                             </div>
-//                         </div>
-//                         <h2 className={`text-lg lg:text-2xl font-bold text-white mt-18 flex-1`} >{school.name}</h2>
-//                         <p className="text-white">{school.degree}</p>
-//                         {index === 2 ? <p className="absolute hidden text-12xl -bottom-5 right-10 md:visible lg:hidden">🚀</p> : null}
-//                     </div>
-//                 )}
-//             </div>
-//             {/* </CardLayout> */}
-//         </>
-//     );
-// }
-
-// const Publication = () => {
-//     const publication = me.publications[0]
-//     return (
-//         <div className="md:-mx-5 lg:-mx-15">
-//             <CardLayout>
-//                 {/* <img className="absolute -right-15 -bottom-15 " src="/static/images/wave.png" alt="wave" /> */}
-//                 <div className="flex items-center justify-between mb-4">
-//                     <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msg}`}>Publication</h1>
-//                     <a href={publication.link}>
-//                         <div className={`${Colors["blue"].bg.msg} h-full text-xs text-white py-1 px-2 md:(px-3 py-2) rounded-full hover:scale-95 transform transition-all duration-200 ease-in-out font-normal`}>
-//                             ↓ Download</div>
-//                     </a>
-//                 </div>
-//                 <p className="mt-2 font-semibold leading-5 md:text-lg" lang="en">{publication.title}</p>
-//                 <div className="mb-2">
-//                     {publication.authors.map((author: any, index: number) =>
-//                         <div key={author.name} className="inline">
-//                             <span className={`text-xs md:text-sm ${author.me ? "text-true-gray-500 font-semibold" : "text-true-gray-400"}`} >{author.name}</span>
-//                             <span className="text-xs text-true-gray-400 md:text-sm">{index != publication.authors.length - 1 ? ", " : ""}</span>
-//                         </div>
-//                     )}
-//                 </div>
-//                 <div className="my-3">
-//                     {publication.tags.map((tag: any) =>
-//                         <span className={`inline-block text-[9px] mr-1 md:(text-xs mb-1) ${Colors[tag.color].bg.normal} ${Colors[tag.color].text.msg} px-2 py-1 rounded-full`} key={tag.name}>{tag.name.toUpperCase()}</span>
-//                     )}
-//                 </div>
-//                 <div className={`${Colors["blue"].text.msg} inline-block mt-3`}>
-//                     <a className={`transition-all duration-200 ease-in-out bg-bottom bg-no-repeat bg-no-underline-size hover:bg-underline-size bg-underline-blue text-sm md:text-normal`}
-//                         after="content-↗"
-//                         href={publication.website} target="_blank" rel="noopener noreferrer">{`Learn more in our website `}</a>
-//                 </div>
-//             </CardLayout>
-//         </div>
-//     )
-// }
-
 const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true })
@@ -518,63 +413,14 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
             <div className="px-4 mx-auto my-6 lg:px-11 md:px-5 md:w-screen-md lg:w-screen-lg">
                 <Overview />
             </div>
-            {/* <div className="bg-white">
-                <ContentLayout>
-                    <div className="px-5 py-10 my-10">
-                        <OverviewOld />
-                    </div>
-                </ContentLayout>
-            </div> */}
-            {/* <ListLayout> */}
-            {/* <Skills /> */}
-            {/* <div className="bg-white h-100 rounded-2xl my-5 border-[0.5px] border-true-gray-100">
-
-                </div> */}
-            {/* </ListLayout> */}
-            {/* <div className={`${Colors["purple"].bg.msg}`}> */}
             <ProjectHero />
             <ListLayout>
                 <div className="my-10">
                     <Project />
                 </div>
             </ListLayout>
-            {/* </div> */}
-            {/* <ContentLayout>
-                <div className="my-10">
-                    <Publication />
-                </div>
-            </ContentLayout> */}
-            {/* <div className={`bg-white pb-5 pt-5`}>
-                <ListLayout>
-                    <Education />
-                </ListLayout>
-            </div> */}
-            {/* <ListLayout>
-                <MediaContextProvider >
-                    <Media greaterThan="sm" className="grid grid-cols-2 gap-6.5 lg:gap-10">
-                        <WidgetMeMedium />
-                        <WidgetOverViewMedium posts={posts} />
-                    </Media>
-                    <Media lessThan="md" className="grid grid-cols-2 gap-4">
-                        <WidgetMeSmall />
-                        <WidgetOverViewSmall posts={posts} />
-                    </Media>
-                </MediaContextProvider>
-            </ListLayout> */}
         </>
     )
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//     const db = await getDatabase()
-
-//     return {
-//         props: {
-//             posts: db,
-//         },
-//         revalidate: 60 * 60,
-//     }
-// }
-
 
 export default Me

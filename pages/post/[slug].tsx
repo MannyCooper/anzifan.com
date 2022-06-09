@@ -25,6 +25,7 @@ import { WidgetMeMedium, WidgetMeSmall } from "../../components/widget/WidgetMe"
 import { WidgetOverViewMedium, WidgetOverViewSmall } from "../../components/widget/WidgetOverview";
 import ListLayout from "../../components/layout/ListLayout";
 import ThemedImage from "../../components/ThemedImage";
+import FrontMessage from "../../components/FrontMessage";
 
 const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {    
     if (!page || !blocks) {
@@ -63,6 +64,7 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
             </CoverLayout>
             <ContentLayout>
                 {/* <div data-aos="fade-down"> */}
+                <FrontMessage post={page} />
                 {blocks.map(block => {
                     return (
                         <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>

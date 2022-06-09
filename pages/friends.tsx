@@ -28,12 +28,12 @@ const FriendCard: FC<FriendType> = friend => {
                     </a>
                     <div className="pb-2 text-center" >
                         <p className="leading-4">{friend.name}</p>
-                        <p className="mt-1 text-sm text-true-gray-400">
+                        <div className="mt-1 text-sm text-true-gray-400">
                             {status !== Status.offline ?
                                 <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 animate-pulse ${status === Status.online ? Colors['green'].bg.msg : Colors['yellow'].bg.msg} rounded-full`} />{status === Status.online ? "Online" : "Loading"}</span>
                                 :
                                 <span className="flex items-center justify-center gap-1"><div className={`w-2 h-2 ${Colors['red'].bg.msg} rounded-full`} />Offline</span>
-                            }</p>
+                            }</div>
                     </div>
                     <a target="_blank" rel="noopener noreferrer" href={friend.url} className={`select-none rounded-full ${status === Status.online ? Colors['blue'].bg.msg : `${Colors['gray'].bg.msg} pointer-events-none`} text-white w-16 text-center text-sm p-1`} >
                         Visit

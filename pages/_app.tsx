@@ -28,6 +28,12 @@ type AppPropsWithLayout = AppProps & {
 config.autoAddCss = false
 library.add(fab)
 
+declare global {
+  interface Window {
+    _hmt:any;
+  }
+}
+
 function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
 
   useEffect(() => {
@@ -39,6 +45,9 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
 
     const handleRouteChange = (url: string) => {
       pageview(url, document.title);
+      try{
+        window._hmt.push(['_trackPageview', url]);
+      } catch (e){}
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {

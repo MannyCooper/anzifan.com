@@ -3,6 +3,18 @@ import { GA_TRACKING_ID } from '../lib/gtag'
 
 
 export default function Document() {
+    const getBaiduAnalyticsTag = () => {
+        return {
+            __html: `
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cba64d0811724e0e4763bd8a13059f1a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();`,
+        }
+    }
     return (
         <Html>
             <Head>
@@ -21,6 +33,7 @@ export default function Document() {
               `,
                     }}
                 />
+                <script dangerouslySetInnerHTML={getBaiduAnalyticsTag()} />
             </Head>
             <body>
                 <Main />
