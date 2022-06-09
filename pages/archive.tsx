@@ -8,6 +8,7 @@ import { Post } from "../lib/types";
 import Image from "next/image";
 import { FullListLayout } from "../components/layout/ListLayout";
 import moment from "moment";
+import ThemedImage from "../components/ThemedImage";
 
 // TODO: Add pagination and filter
 
@@ -35,11 +36,7 @@ const Archive: NextPage<{ posts: Post[] }> = ({ posts }) => {
                                 <a className="flex flex-row lg:items-center">
                                     <div className="aspect-square md:aspect-video h-26 md:h-37 lg:h-41.5 rounded-2xl overflow-hidden shrink-0">
                                         <div className={`relative duration-500 ease-in-out filter group-hover:brightness-90 transition w-full h-full rounded-2xl overflow-hidden transform rotate-0`}>
-                                            <Image src={post.cover.light} layout="fill" objectFit="cover" alt={post.title}
-                                                // onLoadingComplete={handleLoad}
-                                                placeholder="blur"
-                                                blurDataURL={post.cover.blurLight}
-                                                className="transition-all duration-500 ease-in-out opacity-100 mobile-hover:group-hover:scale-105
+                                            <ThemedImage post={post} quality={80} className="transition-all duration-500 ease-in-out opacity-100 mobile-hover:group-hover:scale-105
                                                 group-hover:rotate-0 group-hover:active:scale-105 group-hover:opacity-90 transform-gpu rounded-2xl overflow-hidden" />
                                         </div>
                                     </div>

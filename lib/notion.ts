@@ -56,7 +56,7 @@ export const getDatabase = async (slug?: string) => {
 
             const slug = properties.Slug.type === "rich_text" && properties.Slug.rich_text[0]?.plain_text
             const title = properties.Title.type === "title" && properties.Title.title.slice(-1)[0]?.plain_text
-            const date = properties.Date.type === "created_time" && properties.Date.created_time
+            const date = properties.Date.type === "date" && properties.Date.date?.start
             const updateDate = properties.UpdateDate.type === "last_edited_time" && properties.UpdateDate.last_edited_time
 
             const undefinedCover = "https://cdn.dribbble.com/users/3167939/screenshots/10422336/media/b618a0e73996c3b24b58b2db1c881ee3.png"
