@@ -60,7 +60,7 @@ const NotionBookmark = ({ value }: { value: any }) => {
                             <div className="leading-4 line-clamp-2 text-sm text-true-gray-400 mb-2">{description ? description : open_graph?.description}</div>
                             <div className="flex-1"></div>
                             <div className="flex items-center space-x-2  text-sm text-true-gray-400">
-                                <img className="h-4 w-4 rounded" src={favicon} alt="favicon" />
+                                <img className="h-4 w-4 rounded" src={favicon.replace('http://','https://')} alt="favicon" />
                                 {/* <FontAwesomeIcon icon={LinkIcon} /> */}
                                 <span className="truncate">{url}</span>
                             </div>
@@ -68,11 +68,11 @@ const NotionBookmark = ({ value }: { value: any }) => {
                         {/* <div className="w-2/10 flex items-center overflow-hidden"> */}
                         {images && images.length > 0 && (
                             <div className=" rounded-r-2xl h-full w-3/10 overflow-hidden" >
-                                <img src={images[0].url} alt={title} className="object-cover h-full w-full" />
+                                <img src={images[0].url.replace('http://','https://')} alt={title} className="object-cover h-full w-full" />
                             </div>
                         ) || (
                                 <div className="flex justify-center items-center h-full w-3/10 overflow-hidden rounded-r-2xl bg-light-400" dark="bg-dark-400" >
-                                    <img className="rounded-full h-10 w-10" src={favicon} alt="favicon" />
+                                    <img className="rounded-full h-10 w-10" src={favicon.replace('http://','https://')} alt="favicon" />
 
                                 </div>)}
 
