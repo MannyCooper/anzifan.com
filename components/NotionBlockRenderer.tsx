@@ -42,7 +42,7 @@ export function renderNotionBlock(block: any) {
 
         case 'bulleted_list_item':
             return (
-                <ul className="my-2 list-disc list-inside font-light">
+                <ul className="my-2 list-disc list-outside font-light">
                     <li>
                         <NotionText text={value.text} />
                         {value.children?.map((block: any) => (
@@ -55,7 +55,7 @@ export function renderNotionBlock(block: any) {
         // TODO: Fix number order
         case 'numbered_list_item':
             return (
-                <ol className="my-1 list-decimal list-inside font-light">
+                <ol className="my-1 list-decimal list-outside font-light">
                     <li>
                         <NotionText text={value.text} />
                         {value.children?.map((block: any) => (

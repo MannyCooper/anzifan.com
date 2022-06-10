@@ -16,10 +16,15 @@ a {
 }
 
 @screen lg {
-  .more-list > :nth-last-child(-n+2){
+  .more-list> :nth-last-child(-n+2) {
     margin-bottom: 0;
   }
-  .more-list > :nth-last-child(-n+2)::after {    
-      display: none;
-  }   
+
+  .more-list> :nth-last-child(-n+2)::after {
+    display: none;
+  }
+}
+
+ul {
+  margin-left: 20px;
 }

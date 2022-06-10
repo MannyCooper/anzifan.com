@@ -16,7 +16,6 @@ const NotionQuote = ({ value }: { value: any }) => {
 
     const previewFetcher = (url: string) => fetch(`/api/bookmark/${encodeURIComponent(url)}`).then(res => res.json())
     const { data, error } = useSWRImmutable(link ?? null, previewFetcher)
-
     if (!link || error) {
         return (
             <div className="py-4 my-4 flex rounded-2xl 
