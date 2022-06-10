@@ -16,9 +16,3 @@ module.exports = withPlaiceholder({
     domains: ['static.anzifan.com','cdn.sspai.com','cdn.dribbble.com', 'image.freepik.com','avatars.githubusercontent.com','cdn.jsdelivr.net','image.cugxuan.cn','blog-static.mikuchan.top','amazonaws.com'],
   },
 })
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
-
-module.exports = withBundleAnalyzer({})
