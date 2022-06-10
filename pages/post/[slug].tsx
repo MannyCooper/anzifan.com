@@ -228,8 +228,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         blocksWithChildren
             .filter((b: any) => b.type === 'numbered_list_item' || b.type === 'bulleted_list_item')
             .map(c => {
-                if (c.numbered_list_item.children !== undefined)
-                    c.numbered_list_item.children
+                const { type } = c
+                if (c[type].children !== undefined)
+                    c[type].children
                         .filter((image: any) => image.type === 'image')
                         .map(async (b: any) => {                        
                                 const { type } = b
