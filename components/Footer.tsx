@@ -61,14 +61,14 @@ const Footer = () => {
                                             安子璠
                                         </a>
                                     </Link>
-                                </span>
-                                <p className="space-x-2 text-[10px] mt-2 text-true-gray-300">
-                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">苏ICP备 2020060340 号</a></span>
-                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011202000528" rel="noopener noreferrer" target="_blank">苏公网安备 32011202000528 号</a></span>
-                                </p>
+                                </span>                                
                             </div>
                             <span><a className="text-true-gray-600 hover:underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" dark="text-true-gray-400">CC BY-NC-SA 4.0</a></span>
                         </div>
+                        <p className="space-x-1 md:space-x-2 text-[10px] mt-2 text-true-gray-300">
+                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">苏ICP备 2020060340 号</a></span>
+                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011202000528" rel="noopener noreferrer" target="_blank">苏公网安备 32011202000528 号</a></span>
+                                </p>
                     </section>
                 </div>
             </footer>
