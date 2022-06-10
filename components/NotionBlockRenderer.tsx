@@ -45,6 +45,9 @@ export function renderNotionBlock(block: any) {
                 <ul className="my-2 list-disc list-inside font-light">
                     <li>
                         <NotionText text={value.text} />
+                        {value.children?.map((block: any) => (
+                            <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
+                        ))}
                     </li>
                 </ul>
             )
@@ -55,6 +58,9 @@ export function renderNotionBlock(block: any) {
                 <ol className="my-1 list-decimal list-inside font-light">
                     <li>
                         <NotionText text={value.text} />
+                        {value.children?.map((block: any) => (
+                            <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
+                        ))}
                     </li>
                 </ol>
             )

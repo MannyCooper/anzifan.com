@@ -33,12 +33,13 @@ const NotionImage = ({ value }: { value: any }) => {
             // }}
             >
                 {width && height ? (
-                    expire === null ?
+                    expire === null ? 
+                    value.blur ?
                         <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height}
                             placeholder="blur"
                             blurDataURL={value.blur}
                         // onLoad={handleLoad}
-                        /> : <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} />
+                        /> : <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} /> : <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} />
                 ) : (
                     <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} />
                 )}
