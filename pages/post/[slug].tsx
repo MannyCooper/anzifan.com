@@ -226,7 +226,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     await Promise.all(
         blocksWithChildren
-            .filter((b: any) => b.type === 'numbered_list_item')
+            .filter((b: any) => b.type === 'numbered_list_item' || b.type === 'bulleted_list_item')
             .map(c => {
                 if (c.numbered_list_item.children !== undefined)
                     c.numbered_list_item.children
