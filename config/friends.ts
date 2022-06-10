@@ -24,5 +24,10 @@ export const friends : FriendType[] = [
         url: 'https://www.mikuchan.top',
         name: '团子的航海日记',
         img: 'https://blog-static.mikuchan.top/avatar.jpg?imageMogr2/thumbnail/!20p/format/webp/blur/1x0/quality/70/w/256/h/256'
+    },
+    {
+        url: 'https://www.ranmc.cn/',
+        name: 'RanWhite',
+        img: 'https://avatars.githubusercontent.com/u/69817107'
     }
 ]
