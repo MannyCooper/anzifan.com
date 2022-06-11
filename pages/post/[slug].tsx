@@ -28,8 +28,22 @@ import ThemedImage from "../../components/ThemedImage";
 import FrontMessage from "../../components/FrontMessage";
 import { faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useSWR from 'swr';
+import { Post } from "../../lib/types";
+import readingTime from "reading-time";
 
-const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
+const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
+    const { data } = useSWR(
+        `/api/page-views?slug=${encodeURIComponent('/post/' + page.slug)}`,
+        async url => {
+            const res = await fetch(url);
+            return res.json();
+        },
+        { revalidateOnFocus: false }
+    );
+    const views = data?.pageViews || "-";
+
+    const { text } = readingTime(blocks.map(b=>b.paragraph?.text?.map((t : any)=>t.text?.content)).join(""));
     if (!page || !blocks) {
         return <>
             <Head>
@@ -41,18 +55,24 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
 
     return (
         <>
+            <Head>
+                <title>{page.title}</title>
+            </Head>
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
                     <div className="mt-6">
                         <Link href="/category/[{Category}]" as={`/category/${page.category.name}`} passHref>
                             <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
                         </Link>
-                        <div>
-                            <Moment className="block mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400" date={page.date} fromNow
+                        <div className="flex flex-row space-x-2 items-center mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400">
+                            <Moment date={page.date} fromNow
                                 // format="MMM DD, yy"
                                 format="yyyy 年 MM 月 DD 日"
                                 local />
-
+                            <p>·</p>
+                            <p>{text}</p>
+                            <p>·</p>
+                            <p className={`${views === "-" ? "animate-pulse":""}`}>{views} Views</p>                            
                         </div>
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
@@ -74,8 +94,8 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
                         <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
                     )
                 })}
-                <div className={`flex flex-col mt-8 justify-between ${page.OriginalCover ? "md:flex-row-reverse md:items-center" : ""} space-y-4 w-full`}>
-                    {page.OriginalCover ?
+                <div className={`flex flex-col mt-8 justify-between ${page.originalCover ? "md:flex-row-reverse md:items-center" : ""} space-y-4 w-full`}>
+                    {page.originalCover ?
                         <a href="mailto:541297173@qq.com">
                             <div className="whitespace-nowrap  rounded-full px-2 py-1 space-x-2 bg-true-gray-100 text-true-gray-800 text-sm inline-block" dark="bg-true-gray-800 text-true-gray-100">
                                 <FontAwesomeIcon icon={faPalette} />
