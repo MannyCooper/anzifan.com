@@ -27,7 +27,7 @@ export const friends : FriendType[] = [
     },
     {
         url: 'https://www.ranmc.cn/',
-        name: 'RanWhite',
+        name: 'Ranica',
         img: 'https://avatars.githubusercontent.com/u/69817107'
     }
 ]
