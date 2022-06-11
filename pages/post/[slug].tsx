@@ -43,14 +43,17 @@ const PostPage: NextPage<{ page: any; blocks: any[]; pagination: any; posts: any
         <>
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
-                    <div>
+                    <div className="mt-6">
                         <Link href="/category/[{Category}]" as={`/category/${page.category.name}`} passHref>
                             <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
                         </Link>
-                        <Moment className="block mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400" date={page.date} fromNow
-                            // format="MMM DD, yy"
-                            format="yyyy 年 MM 月 DD 日"
-                            local />
+                        <div>
+                            <Moment className="block mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400" date={page.date} fromNow
+                                // format="MMM DD, yy"
+                                format="yyyy 年 MM 月 DD 日"
+                                local />
+
+                        </div>
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
                     <p className="mb-4 text-xl font-medium text-true-gray-600 lg:text-2xl" dark="text-true-gray-400">
@@ -232,18 +235,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 if (c[type].children !== undefined)
                     c[type].children
                         .filter((image: any) => image.type === 'image')
-                        .map(async (b: any) => {                        
-                                const { type } = b
-                                const value = b[type]
-                                const src = value.type === 'external' ? value.external.url : value.file.url
-                                const { width, height } = await probeImageSize(src)
-                                const blur = (await getPlaiceholder(src, {
-                                    size: 10,
-                                })).base64
-                                value['size'] = { width, height }
-                                value['blur'] = blur
-                                b[type] = value                            
-                    })
+                        .map(async (b: any) => {
+                            const { type } = b
+                            const value = b[type]
+                            const src = value.type === 'external' ? value.external.url : value.file.url
+                            const { width, height } = await probeImageSize(src)
+                            const blur = (await getPlaiceholder(src, {
+                                size: 10,
+                            })).base64
+                            value['size'] = { width, height }
+                            value['blur'] = blur
+                            b[type] = value
+                        })
             })
     )
 
