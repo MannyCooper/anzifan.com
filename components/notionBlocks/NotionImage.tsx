@@ -24,6 +24,8 @@ const NotionImage = ({ value }: { value: any }) => {
     //     }
     // };
 
+    imageSrc = imageSrc.split('?')[0]
+
     return (
         <figure className="mx-auto my-6 max-w-11/12 rounded-2xl" data-aos="fade-up" data-aos-duration="800" >
             <div className={`${expire === null ? "flex justify-center" : ""} transition-all duration-800 ease-in-out rounded-2xl overflow-hidden relative w-full h-full`}
