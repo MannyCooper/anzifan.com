@@ -44,7 +44,7 @@ const Pagination = ({ pagination }: { pagination: PaginationType }) => {
     }
 
     return (
-        <div className="my-4 flex flex-col sm:(flex-row ) rounded-3xl overflow-hidden relative z-10">
+        <div className="my-4 flex flex-col sm:(flex-row ) rounded-3xl overflow-hidden relative z-10 border-1 border-true-gray-400/10">
             {paginationCard(pagination.prev, 'Prev')}
             {paginationCard(pagination.next, 'Next')}
         </div>

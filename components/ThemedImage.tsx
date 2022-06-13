@@ -35,7 +35,7 @@ function ThemedImage(params: any) {
             break
     }
 
-    return <Image src={src} quality={params.quality || 100} layout="fill" objectFit="cover" sizes="100%" alt={params.post.title}
+    return <Image priority={true} src={src} quality={params.quality || 100} layout="fill" objectFit="cover" alt={params.post.title}
         // onLoadingComplete={handleLoad}
         placeholder="blur"
         blurDataURL={blurSrc}

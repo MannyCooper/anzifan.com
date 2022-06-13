@@ -60,7 +60,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
             </Head>
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
-                    <div className="mt-6">
+                    <div className="mt-3 md:mt-6">
                         <Link href="/category/[{Category}]" as={`/category/${page.category.name}`} passHref>
                             <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
                         </Link>

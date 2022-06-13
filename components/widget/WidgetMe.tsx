@@ -16,9 +16,9 @@ export const WidgetMeSmall: FC = () => {
                 //  data-aos="fade-up"
                 >
                     <Link href={"/me"} >
-                        <a className="h-1/2">
-                            <div className="rounded-2xl h-full aspect-square overflow-hidden relative">
-                                <Image layout="fill" objectFit="cover" src="/static/images/portrait.png" alt="Portrait" placeholder="blur"
+                        <a className="h-1/2 rounded-2xl overflow-hidden">
+                            <div className="rounded-2xl h-full aspect-square overflow-hidden relative transform rotate-0">
+                                <Image className="rounded-2xl overflow-hidden" layout="fill" objectFit="cover" src="/static/images/portrait.png" alt="Portrait" placeholder="blur"
                                     blurDataURL={portraitPlaceholder} />
                             </div>
                         </a>
@@ -55,8 +55,8 @@ export const WidgetMeMedium: FC<{ fix?: boolean }> = ({ fix }) => {
                 >
                     <Link href={"/me"} >
                         <a className={`flex flex-row items-center h-4/7 p-3 pb-2.5 ${fix ? "" : "lg:(px-4)"}`}>
-                            <div className="rounded-full aspect-square h-full relative overflow-hidden">
-                                <Image layout="fill" objectFit="cover" src="/static/images/portrait.png" alt="Portrait" placeholder="blur"
+                            <div className="rounded-full aspect-square h-full relative overflow-hidden transform rotate-0">
+                                <Image className="rounded-full overflow-hidden" layout="fill" objectFit="cover" src="/static/images/portrait.png" alt="Portrait" placeholder="blur"
                                     blurDataURL={portraitPlaceholder} />
                             </div>
                             <div className={`flex flex-col justify-between p-3 ${fix ? "" : "lg:p-4"}`}>
@@ -65,7 +65,7 @@ export const WidgetMeMedium: FC<{ fix?: boolean }> = ({ fix }) => {
                             </div>
                         </a>
                     </Link>
-                    <div className="h-3/7 bg-true-gray-100"  dark="bg-true-gray-800">
+                    <div className="h-3/7 bg-true-gray-100" dark="bg-true-gray-800">
                         <div className={`flex items-center justify-between p-3 ${fix ? "" : "lg:(px-4)"} h-full gap-1 overflow-scroll`}>
                             {links.map((link: LinkType, index: number) => (
                                 <a target="_blank" rel="noopener noreferrer" key={link.url} href={link.url} className={`rounded-lg lg:rounded-xl flex items-center font-medium text-white justify-center h-full bg-gradient-to-tr ${link.color} ${index === 0 ? "col-span-2 text-10px gap-0.7 px-2 lg:(text-sm gap-1)" : "aspect-square"} transform transition ease-in-out duration-200 hover:scale-95 `}>

@@ -13,6 +13,7 @@
   "dependencies": {
     "@artsy/fresnel": "^3.5.0",
     "@charkour/react-reactions": "^0.6.1",
+    "@cloudbase/js-sdk": "^1.7.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -43,7 +44,7 @@
     "sharethis-reactjs": "^1.6.0",
     "sharp": "^0.30.5",
     "swr": "^1.1.2",
-    "twikoo": "^1.4.15",
+    "twikoo": "^1.5.11",
     "unfurl.js": "^5.6.2"
   },
   "devDependencies": {
