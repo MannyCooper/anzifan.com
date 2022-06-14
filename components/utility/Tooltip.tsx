@@ -1,14 +1,14 @@
 import { createRef } from "react";
 
-export function Tooltip({ children, tooltipText }: any) {
+export function Tooltip({ children, tooltipText, marginTop }: any) {
     const tipRef: any = createRef();
     function handleMouseEnter() {
         tipRef.current.style.opacity = 1;
-        tipRef.current.style.marginTop = "5px";
+        tipRef.current.style.marginTop = marginTop ?? "5px";
     }
     function handleMouseLeave() {
         tipRef.current.style.opacity = 0;
-        tipRef.current.style.marginTop = "5px";
+        tipRef.current.style.marginTop = marginTop ?? "5px";
     }
     return (
         <div

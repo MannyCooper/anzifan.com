@@ -14,6 +14,9 @@ import { WidgetMeMedium, WidgetMeSmall } from '../components/widget/WidgetMe'
 import ListLayout from '../components/layout/ListLayout'
 import { WidgetOverViewMedium, WidgetOverViewSmall } from '../components/widget/WidgetOverview'
 import { Media, MediaContextProvider } from '../components/utility/Breakpoints'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
+import { me } from '../config/me'
 
 // type PostResult = QueryDatabaseResponse['results'][number];
 
@@ -23,9 +26,25 @@ import { Media, MediaContextProvider } from '../components/utility/Breakpoints'
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   const mainPosts = posts.slice(0, 17)
-
+  const router = useRouter();
+  const { locale } = router;
+  const description = "异次元de机智君的个人博客"
+  const featuredImage = {
+    url: `${me.site}/static/images/og.png`,
+    alt: description,
+}
   return (
     <>
+    {/* <NextSeo
+        canonical={router.asPath}
+        description={description}
+        openGraph={{
+          description,
+          locale,
+          images: [featuredImage],
+          url: `${router.asPath}`,
+        }}
+      /> */}
       <ListLayout>
         <MediaContextProvider >
           <Media greaterThanOrEqual="md" className="grid grid-cols-2 gap-6.5 lg:gap-10">

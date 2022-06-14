@@ -1,84 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Wechat, Sinaweibo, Twitter } from '@icons-pack/react-simple-icons'
+import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { InlineShareButtons } from 'sharethis-reactjs';
-import { InlineReactionButtons } from 'sharethis-reactjs';
-// import { GithubCounter,GithubSelector,ReactionBarSelector,ReactionCounter } from '@charkour/react-reactions';
+import { useRouter } from "next/router";
+import { me } from "../config/me";
 
-// export const Reaction = () => {
-//     return (
-//         <div className="w-full">
-//             <GithubCounter />
-//         </div>
-//     )
-// }
+export const Share = () => {
+  const share: any[] = []
+  const [shares, setShares] = useState(share)
+  const router = useRouter()
+  const [copied, setCopied] = useState(false)
 
-export class Share extends React.Component {
+  useEffect(() => {
+    const wechatShare = document.querySelector('#sharethis [data-network="wechat"]') as HTMLElement
+    const weiboShare = document.querySelector('#sharethis [data-network="weibo"]') as HTMLElement
+    const twitterShare = document.querySelector('#sharethis [data-network="twitter"]') as HTMLElement
 
-    render() {
-        return (
-            <div className="">
-                <InlineShareButtons
-                    config={{
-                        alignment: 'left',  // alignment of buttons (left, center, right)
-                        color: 'social',      // set the color of buttons (social, white)
-                        enabled: true,        // show/hide buttons (true, false)
-                        font_size: 16,        // font size for the buttons
-                        labels: null,        // button labels (cta, counts, null)
-                        language: 'en',       // which language to use (see LANGUAGES)
-                        networks: [           // which networks to include (see SHARING NETWORKS)
-                            'twitter',
-                            'weibo',
-                            'wechat',
-                        ],
-                        padding: 7,          // padding within buttons (INTEGER)
-                        radius: 9,            // the corner radius on each button (INTEGER)
-                        show_total: false,
-                        size: 25,             // the size of each button (INTEGER)
-
-                        // // OPTIONAL PARAMETERS           
-                        // description: 'custom text',       // (defaults to og:description or twitter:description)
-                        // title: 'custom title',            // (defaults to og:title or twitter:title)
-                        // message: 'custom email text',     // (only for email sharing)
-                        // subject: 'custom email subject',  // (only for email sharing)
-                        // username: 'custom twitter handle' // (only for twitter sharing)
-                    }}
-                />
-            </div>
-        );
-    }
-};
-
-export class Reaction extends React.Component {
-
-  render () {
-    return (
-      <div className="Reaction">
-        <style dangerouslySetInnerHTML={{__html: `
-        .Reaction{
-          margin: -5px 0;
+    setShares([
+      { name: 'wechat', icon: <Wechat size="20" />, color: 'hover:text-green-400', onClick: () => wechatShare.click() },
+      { name: 'weibo', icon: <Sinaweibo size="20" />, color: 'hover:text-red-400', onClick: () => weiboShare.click() },
+      { name: 'twitter', icon: <Twitter size="20" />, color: 'hover:text-blue-400', onClick: () => twitterShare.click() },
+      {
+        name: 'link', icon: <FontAwesomeIcon icon={faLink} />, color: 'hover:text-orange-400', onClick: () => {
+          navigator.clipboard.writeText(me.site + router.asPath)
+          setCopied(true)
+          setTimeout(() => {
+            setCopied(false)
+          }, 2000);
         }
-        }
-      `}} />
-      <h1 className="text-xl text-center">🤔 What do you think?</h1>
-      <InlineReactionButtons
+      },
+    ])    
+  }, [router.asPath])
+
+  return (
+    <>
+      <div id="sharethis" className="hidden">
+        <InlineShareButtons
           config={{
-            alignment: 'center',  // alignment of buttons (left, center, right)
-            enabled: true,        // show/hide buttons (true, false)
-            language: 'en',       // which language to use (see LANGUAGES)
-            min_count: 0,         // hide react counts less than min_count (INTEGER)
-            padding: 12,          // padding within buttons (INTEGER)
-            reactions: [          // which reactions to include (see REACTIONS)
-              'slight_smile',
-              'astonished',
-              'sob',
-              'rage'
+            alignment: 'left',
+            color: 'social',
+            enabled: true,
+            font_size: 16,
+            labels: null,
+            language: 'en',
+            networks: [
+              'twitter',
+              'weibo',
+              'wechat',
             ],
-            size: 40,             // the size of each button (INTEGER)
-            radius: 0,
-            show_total: true,
-            // OPTIONAL PARAMETERS
+            padding: 7,
+            radius: 9,
+            show_total: false,
+            size: 25,
           }}
-        />  
-      </div>    
-    )
-  }
-}    
+        />
+      </div>
+      <div className="flex items-center space-x-5 text-true-gray-400 mt-4 relative">
+        {shares.map(share => (
+          <button key={share.name} className={`leading-0 ${share.color}`} onClick={share.onClick}>
+            {share.icon}
+          </button>
+        ))}
+          <p id="copiedNotify" className={`pointer-events-none transition-all duration-500 delay-100 ease-in-out ${copied ? "opacity-100" : "opacity-0"} text-sm rounded-full border-1 border-true-gray-400/10 px-2 py-1 absolute left-32`}>Copied</p>
+      </div>
+    </>
+  )
+}
