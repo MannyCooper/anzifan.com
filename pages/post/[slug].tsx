@@ -30,7 +30,7 @@ import { faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Post } from "../../lib/types";
 import readingTime from "reading-time";
-import PostSeo from "../../components/PostSEO";
+import PostSeo from "../../components/PostSeo";
 import { useRouter } from "next/router";
 
 const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
