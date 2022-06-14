@@ -22,7 +22,7 @@ const Pagination = ({ pagination }: { pagination: PaginationType }) => {
     const paginationCard = (pagination: any, indicator: string) => {
         return (
             pagination && (
-                <Link href="/post/[slug]" as={`/post/${pagination.slug}`}>
+                <Link href={`/post/${pagination.slug}`}>
                     <a className={`relative z-0 w-full overflow-hidden transition duration-500 h-30 md:h-35 bg-true-gray-200 filter hover:brightness-90 transition duration-300 ease-in-out group hover:shadow-lg `} dark="bg-true-gray-700">
                         <div className="relative w-full h-full"
                         // style={{

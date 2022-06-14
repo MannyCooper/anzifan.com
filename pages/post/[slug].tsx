@@ -15,7 +15,7 @@ import Moment from "react-moment"
 import Link from "next/link"
 import { Colors } from "../../lib/colors"
 import { getPlaiceholder } from "plaiceholder";
-import { Reaction, Share } from "../../components/Share";
+import { Share } from "../../components/Share";
 import Licensing from "../../components/Licensing";
 import TagsIcon from '../../assets/tags.svg'
 import Pagination from "../../components/Pagination";
@@ -33,17 +33,7 @@ import { Post } from "../../lib/types";
 import readingTime from "reading-time";
 
 const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
-    const { data } = useSWR(
-        `/api/page-views?slug=${encodeURIComponent('/post/' + page.slug)}`,
-        async url => {
-            const res = await fetch(url);
-            return res.json();
-        },
-        { revalidateOnFocus: false }
-    );
-    const views = data?.pageViews || "-";
-
-    const { text } = readingTime(blocks.map(b=>b.paragraph?.text?.map((t : any)=>t.text?.content)).join(""));
+    const { text } = readingTime(blocks.map(b => b.paragraph?.text?.map((t: any) => t.text?.content)).join(""));
     if (!page || !blocks) {
         return <>
             <Head>
@@ -72,7 +62,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                             <p>·</p>
                             <p>{text}</p>
                             <p>·</p>
-                            <p className={`${views === "-" ? "animate-pulse":""}`}>{views} Views</p>                            
+                            <p><span id="twikoo_visitors"><span className="animate-pulse">-</span></span> Views</p>
                         </div>
                     </div>
                     <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
@@ -109,7 +99,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                             {page.tags.map((tag: any) =>
                                 <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
                                     <a href={`/tag/${tag.name}`}>
-                                        <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} >
+                                        <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} bg-gradient-to-bl from-white/20 text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} dark="bg-gradient-to-br to-black/10" >
                                             {tag.name}
                                         </div>
                                     </a>

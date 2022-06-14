@@ -33,24 +33,15 @@ const Comment = () => {
     if (!mounted) {
         return null
     }
-    // useEffect(() => {
-    //     var twikoo = require('twikoo/dist/twikoo.min')
-    //     twikoo.getRecentComments({
-    //         envId: 'https://twikoo-vercel-rho.vercel.app',
-    //         el: '#tcomment'
-    //     }).then((res: any) => {
-    //         console.log(res)
-    //     })
-    // })
 
-    const comments = [
+    const comments = [        
+        {
+            name: 'Twikoo (国内访问，无需登录)',
+            component: <TwikooComponent />
+        },
         {
             name: 'Giscus',
             component: <GiscusComponent theme={resolvedTheme === 'dark' ? 'dark' : 'light'} />
-        },
-        {
-            name: 'Twikoo (国内访问，无需登录)',
-            component: <div className="tcomment"><TwikooComponent /></div>
         },
     ]
 
