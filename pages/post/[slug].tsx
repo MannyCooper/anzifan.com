@@ -28,12 +28,15 @@ import ThemedImage from "../../components/ThemedImage";
 import FrontMessage from "../../components/FrontMessage";
 import { faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useSWR from 'swr';
 import { Post } from "../../lib/types";
 import readingTime from "reading-time";
+import PostSeo from "../../components/PostSEO";
+import { useRouter } from "next/router";
 
 const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
     const { text } = readingTime(blocks.map(b => b.paragraph?.text?.map((t: any) => t.text?.content)).join(""));
+    const router = useRouter();
+    const { locale } = router;
     if (!page || !blocks) {
         return <>
             <Head>
@@ -45,9 +48,8 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
 
     return (
         <>
-            <Head>
-                <title>{page.title}</title>
-            </Head>
+            <PostSeo date={page.date} description={page.excerpt} image={page.cover.light} locale={locale || ""} title={page.title} url={router.asPath}            
+            />
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
                     <div className="mt-3 md:mt-6">
