@@ -12,6 +12,7 @@ export interface Post {
     tip: string,
     sspai: string,
     originalCover: boolean,
+    colorTitle: boolean
 };
 
 export type Tag = {

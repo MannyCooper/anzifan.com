@@ -71,7 +71,7 @@ export const getDatabase = async (slug?: string) => {
             const tip = properties.Tip.type == "rich_text" && properties.Tip.rich_text[0]?.plain_text
             const sspai = properties.SSPAI.type == "url" && properties.SSPAI.url
             const originalCover = properties.OriginalCover.type == "checkbox" && properties.OriginalCover.checkbox
-
+            const colorTitle = properties.ColorTitle.type == "checkbox" && properties.ColorTitle.checkbox
             return {
                 id: result.id,
                 slug: slug || "",
@@ -86,6 +86,7 @@ export const getDatabase = async (slug?: string) => {
                 tip: tip || "",
                 sspai: sspai || "",
                 originalCover: originalCover || false,
+                colorTitle: colorTitle || false,
             } as unknown as Post
         })
 }

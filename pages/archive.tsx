@@ -31,7 +31,7 @@ const Archive: NextPage<{ posts: Post[] }> = ({ posts }) => {
                                     local />
                             </div> : null
                         }
-                        <li className={`mb-8 w-full group`} key={post.id} before={`content-0 flex-shrink-0 flex-grow-0 text-transparent select-none h-[1px] block bg-true-gray-200 mb-8`}>
+                        <li className={`mb-8 w-full group`} key={post.id} before={`content-DEFAULT flex-shrink-0 flex-grow-0 text-transparent select-none h-[1px] block bg-true-gray-200 mb-8`}>
                             <Link href="/post/[slug]" as={`/post/${post.slug}`} >
                                 <a className="flex flex-row lg:items-center">
                                     <div className="aspect-square md:aspect-video h-26 md:h-37 lg:h-41.5 rounded-2xl overflow-hidden shrink-0">

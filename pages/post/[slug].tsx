@@ -66,7 +66,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                             <p><span id="twikoo_visitors"><span className="animate-pulse">-</span></span> Views</p>
                         </div>
                     </div>
-                    <p className="my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl">{page.title}</p>
+                    <p className={`my-6 text-4xl font-bold whitespace-pre-wrap lg:text-5xl ${page.colorTitle ? `${Colors[page.category.color]?.bg.gradient} bg-gradient-to-r text-transparent bg-clip-text` : ""} relative z-0`}>{page.title}</p>
                     <p className="mb-4 text-xl font-medium text-true-gray-600 lg:text-2xl" dark="text-true-gray-400">
                         {page.excerpt}
                     </p>

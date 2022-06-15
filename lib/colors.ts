@@ -12,7 +12,7 @@
 export type colorsType = {
     [key: string]: {
         [text: string]: {
-            normal: string, msg: string
+            normal: string, msg: string, gradient? : string
         },
     }
 }
@@ -26,6 +26,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-red-50 dark:bg-red-900/40',
             msg: 'bg-hex-ff3b30 dark:bg-hex-ff453a',
+            gradient: 'from-hex-ff3b30 to-hex-ff9500 dark:(from-hex-ff453a to-hex-ff9f0a)',
         },
     },
     'orange': {
@@ -36,7 +37,8 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-orange-50 dark:bg-orange-900/40',
             msg: 'bg-hex-ff9500 dark:bg-hex-ff9f0a',
-        },
+            gradient: 'from-hex-ff9500 to-hex-ffcc00 dark:(from-hex-ff9f0a to-hex-ffd60a)',
+        }
     },
     'yellow': {
         text: {
@@ -45,7 +47,7 @@ export const Colors: colorsType = {
         },
         bg: {
             normal: 'bg-yellow-50 dark:bg-yellow-900/40',
-            msg: 'bg-hex-ffcc00 dark:bg-hex-ffd60a',
+            msg: 'bg-hex-ffcc00 dark:bg-hex-ffd60a',            gradient: 'from-hex-ffcc00 to-hex-34c759 dark:(from-hex-ffd60a to-hex-30d158)',
         },
     },
     'green': {
@@ -56,6 +58,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-green-50 dark:bg-green-900/40',
             msg: 'bg-hex-34c759 dark:bg-hex-30d158',
+            gradient: 'from-hex-34c759 to-hex-007aff dark:(from-hex-30d158 to-hex-0a84ff)',
         },
     },
     'blue': {
@@ -66,6 +69,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-blue-50 dark:bg-blue-900/40',
             msg: 'bg-hex-007aff dark:bg-hex-0a84ff',
+            gradient: 'from-hex-007aff to-hex-34c759 dark:(from-hex-0a84ff to-hex-30d158)'
         },
     },
     'pink': {
@@ -76,6 +80,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-rose-50 dark:bg-rose-900/40',
             msg: 'bg-hex-ff2d55 dark:bg-hex-ff375f',
+            gradient: 'from-hex-ff2d55 to-hex-ff3b30 dark:(from-hex-ff375f to-hex-ff453a)',
         },
     },
     'purple': {
@@ -86,6 +91,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-indigo-50 dark:bg-indigo-900/40',
             msg: 'bg-hex-5856d6 dark:bg-hex-5e5ce6',
+            gradient: 'from-hex-5856d6 to-hex-007aff dark:(from-hex-5856d6 to-hex-0a84ff)',
         },
     },
     'brown': {
@@ -96,6 +102,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-amber-50 dark:bg-amber-900/40',
             msg: 'bg-hex-a2845e dark:bg-hex-ac8e68',
+            gradient: 'from-hex-a2845e to-hex-ffcc00 dark:(from-hex-ac8e68 to-hex-ffd60a)',
         },
     },
     'gray': {
@@ -106,6 +113,7 @@ export const Colors: colorsType = {
         bg: {
             normal: 'bg-true-gray-100 dark:bg-true-gray-900',
             msg: 'bg-true-gray-300 dark:bg-true-gray-400',
+            gradient: 'bg-black dark:bg-white',
         },
     },
 }

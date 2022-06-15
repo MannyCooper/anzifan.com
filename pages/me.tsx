@@ -237,7 +237,7 @@ const Overview = () => {
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
                                 <div className="col-span-5 flex flex-col gap-1 lg:gap-2">
                                     <a className="filter hover:brightness-110" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-0 text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
+                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-DEFAULT text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
                                     </a>
                                     <a className="filter hover:brightness-110" href="https://www.nyit.edu/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />

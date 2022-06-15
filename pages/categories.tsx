@@ -13,11 +13,7 @@ const CateCard = ({ name, color, count }: { name: string, color: string, count: 
     return (
         <Link href="/category/[name]" as={`/category/${name}`} key={name} >
             <a className="select-none transform transition ease-in-out duration-200 hover:scale-95">
-                {/* <div className={`${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} text-white flex items-center text-2xl font-semibold py-10 px-5  rounded-3xl justify-between  transform transition ease-in-out duration-200 hover:scale-95`}>
-                    <p>{name}</p>
-                    <p className={`bg-white ${Colors[color]?.text.normal ?? Colors['gray'].text.normal} text-lg px-2 h-full text-center rounded-full`}>{count}</p>
-                </div> */}
-                <div className={`aspect-square ${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} rounded-xl p-3 md:p-4 text-white relative z-0 font-semibold overflow-hidden`} before="content-0 text-transparent absolute h-full w-full top-0 left-0 z-10 bg-gradient-to-l from-white opacity-50 to-transparent rounded-xl"
+                <div className={`aspect-square ${Colors[color]?.bg.msg ?? Colors['gray'].bg.msg} rounded-xl p-3 md:p-4 text-white relative z-0 font-semibold overflow-hidden`} before="content-DEFAULT text-transparent absolute h-full w-full top-0 left-0 z-10 bg-gradient-to-l from-white opacity-50 to-transparent rounded-xl"
                 dark="before:from-black">
                     <div className="flex flex-row items-center justify-between text-normal md:text-lg lg:text-xl">
                         <p className="z-20">{name}</p>
