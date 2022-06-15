@@ -1,5 +1,4 @@
 import { GetStaticProps, NextPage } from "next"
-import Image from "next/image";
 import { ParsedUrlQuery } from "querystring"
 import { getAllBlocks, getDatabase, getPage } from "../../lib/notion"
 import { Fragment, useEffect, useState } from 'react'
@@ -48,7 +47,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
 
     return (
         <>
-            <PostSeo date={page.date} description={page.excerpt} image={page.cover.light} locale={locale || ""} title={page.title} url={router.asPath}            
+            <PostSeo date={page.date} description={page.excerpt} image={page.cover.light} locale={locale || ""} title={page.title} url={router.asPath}
             />
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
@@ -97,7 +96,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                     {/* Tags */}
                     <div className="md:w-2/3 flex items-center space-x-2">
                         <TagsIcon className="pr-4 z-10" />
-                        <div className="flex space-x-2 items-center overflow-scroll flex-nowrap z-0">
+                        <div className="flex space-x-2 items-center overflow-scroll scrollbar-hide flex-nowrap z-0">
                             {page.tags.map((tag: any) =>
                                 <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
                                     <a href={`/tag/${tag.name}`}>
