@@ -66,7 +66,7 @@ export const WidgetMeMedium: FC<{ fix?: boolean }> = ({ fix }) => {
                         </a>
                     </Link>
                     <div className="h-3/7 bg-true-gray-100" dark="bg-true-gray-800">
-                        <div className={`flex items-center justify-between p-3 ${fix ? "" : "lg:(px-4)"} h-full gap-1 overflow-scroll`}>
+                        <div className={`flex items-center justify-between p-3 ${fix ? "" : "lg:(px-4)"} h-full gap-1 overflow-scroll scrollbar-hide`}>
                             {links.map((link: LinkType, index: number) => (
                                 <a target="_blank" rel="noopener noreferrer" key={link.url} href={link.url} className={`rounded-lg lg:rounded-xl flex items-center font-medium text-white justify-center h-full bg-gradient-to-tr ${link.color} ${index === 0 ? "col-span-2 text-10px gap-0.7 px-2 lg:(text-sm gap-1)" : "aspect-square"} transform transition ease-in-out duration-200 hover:scale-95 `}>
                                     <link.icon className={`w-4 h-4 fill-white ${fix ? "" : "lg:(w-5 h-5)"}`}></link.icon>
