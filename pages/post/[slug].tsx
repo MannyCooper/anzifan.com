@@ -85,7 +85,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                         <Fragment key={block.id}>{renderNotionBlock(block)}</Fragment>
                     )
                 })}
-                <div className={`flex flex-col mt-8 justify-between ${page.originalCover ? "md:flex-row-reverse md:items-center" : ""} space-y-4 w-full`}>
+                <div className={`flex flex-col mt-8 justify-between ${page.originalCover ? "md:flex-row-reverse md:items-center" : ""} gap-4 w-full`}>
                     {page.originalCover ?
                         <a href="mailto:541297173@qq.com">
                             <div className="whitespace-nowrap  rounded-full px-2 py-1 space-x-2 bg-true-gray-100 text-true-gray-800 text-sm inline-block" dark="bg-true-gray-800 text-true-gray-100">
@@ -94,19 +94,17 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                             </div>
                         </a> : null}
                     {/* Tags */}
-                    <div className="md:w-2/3 flex items-center space-x-2">
-                        <TagsIcon className="pr-4 z-10" />
-                        <div className="flex space-x-2 items-center overflow-scroll scrollbar-hide flex-nowrap z-0">
-                            {page.tags.map((tag: any) =>
-                                <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
-                                    <a href={`/tag/${tag.name}`}>
-                                        <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} bg-gradient-to-bl from-white/20 text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} dark="bg-gradient-to-br to-black/10" >
-                                            {tag.name}
-                                        </div>
-                                    </a>
-                                </Link>
-                            )}
-                        </div>
+                    <div className="flex gap-2 items-center overflow-scroll scrollbar-hide flex-wrap">
+                        <TagsIcon />
+                        {page.tags.map((tag: any) =>
+                            <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
+                                <a href={`/tag/${tag.name}`}>
+                                    <div className={`${Colors[tag.color]?.bg.msg ?? Colors['gray'].bg.msg} bg-gradient-to-bl from-white/20 text-white flex items-center text-xs py-1 px-2  rounded-full whitespace-nowrap`} dark="bg-gradient-to-br to-black/10" >
+                                        {tag.name}
+                                    </div>
+                                </a>
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <Licensing page={page} data-aos="fade-up" data-aos-duration="500" />
