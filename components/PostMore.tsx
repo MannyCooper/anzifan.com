@@ -7,14 +7,16 @@ import Image from "next/image";
 import ThemedImage from "./ThemedImage";
 
 const PostMore: FC<{ posts: Post[] }> = ({ posts }) => {
+    const count = posts.length;
+    const isEven = count % 2 == 0;
     return (
         <div className="py-10 md:py-20">
             <h1 className={`mb-4 text-2xl font-bold md:text-3xl lg:mb-8`} data-aos="fade-up">
                 More Posts 🔭
             </h1>
-            <ul className="flex flex-row flex-wrap items-stretch lg:-mr-16 mt-8 more-list">
-                {posts.map((post, index) =>
-                    <li data-aos="fade-up" className={`lg:mr-16 mb-6 not-last:lg:mb-8 w-full lg:w-114 group lg:odd:after:w-[calc(100%_+_64px)]`} key={post.id} after={`not-last:content-DEFAULT flex-shrink-0 flex-grow-0 text-transparent select-none h-[1px] block bg-true-gray-200 mt-6 lg:mt-8 dark:bg-true-gray-700`}>
+            <ul className={`flex flex-row flex-wrap items-stretch lg:-mr-16 mt-8 ${isEven ? "more-list" : ""}`}>
+                {posts.map((post) =>
+                    <li data-aos="fade-up" className={`lg:mr-16 mb-6 lg:mb-8 w-full lg:w-114 group lg:odd:after:w-[calc(100%_+_64px)]`} key={post.id} after={`${isEven ? "" : "not-last:content-DEFAULT"} flex-shrink-0 flex-grow-0 text-transparent select-none h-[1px] block bg-true-gray-200 mt-6 lg:mt-8 dark:bg-true-gray-700`}>
                         <Link href="/post/[slug]" as={`/post/${post.slug}`} >
                             <a className="flex flex-row items-center">
                                 <div className="w-26 h-26 md:(w-33 h-33) rounded-2xl overflow-hidden shrink-0">
