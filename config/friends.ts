@@ -29,5 +29,10 @@ export const friends : FriendType[] = [
         url: 'https://www.ranmc.cn/',
         name: 'Ranica',
         img: 'https://avatars.githubusercontent.com/u/69817107'
+    },
+    {
+        url: 'https://blog.ccknbc.cc',
+        name: 'CC康纳百川',
+        img: 'https://cdn.jsdelivr.net/gh/ccknbc-backup/cdn@latest/logo/ccknbc.png'
     }
 ]
