@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <NextNprogress color="#ff375f" options={{ showSpinner: false }} />
+      <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
       {getLayout(
         <Component {...pageProps} />
       )}
