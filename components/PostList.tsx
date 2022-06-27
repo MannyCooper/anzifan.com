@@ -104,12 +104,10 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
                         </header>
                         <div className="flex flex-col justify-between flex-1 p-6">
                           <article
-                            className="flex flex-col justify-between"
+                            className="flex flex-col justify-between items-start"
                           >
                             <Link href="/category/[{Category}]" as={`/category/${post.category.name}`} passHref>
-                              {/* <a> */}
-                              <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.normal}`}>{post.category.name}</p>
-                              {/* </a> */}
+                              <p className={`mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[post.category.color].text.normal}`}>{post.category.name}</p>
                             </Link>
                             <h2 className={`${size.title} font-bold`}>{post.title}</h2>
                           </article>

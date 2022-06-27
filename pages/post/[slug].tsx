@@ -52,8 +52,10 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
             <ContentLayout>
                 <header className="flex flex-col text-justify break-word" data-aos="fade-down">
                     <div className="mt-3 md:mt-6">
-                        <Link href="/category/[{Category}]" as={`/category/${page.category.name}`} passHref>
-                            <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
+                        <Link href="/category/[{Category}]" as={`/category/${page.category.name}`}>
+                            <a>
+                                <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
+                            </a>
                         </Link>
                         <div className="flex flex-row space-x-2 items-center mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400">
                             <Moment date={page.date} fromNow
