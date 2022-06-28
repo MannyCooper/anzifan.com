@@ -63,7 +63,7 @@ const NotionCode = ({ value }: { value: any }) => {
             </span>
             {/* <div dangerouslySetInnerHTML={{ __html: innerHtml }} /> */}
             <pre className="font-mono text-sm">
-                <SyntaxHighlighter style={resolvedTheme === "dark" ? darkStyle : lightStyle} wrapLongLines language={syntax} customStyle={{ paddingLeft: 30, paddingRight: 30, paddingTop: 25, margin: 0 }} >
+                <SyntaxHighlighter style={resolvedTheme === "dark" ? darkStyle : lightStyle}  language={syntax} wrapLongLines customStyle={{ paddingLeft: 30, paddingRight: 30, paddingTop: 25, paddingBottom: 25, margin: 0, borderRadius: 16 }} >
                     {code}
                 </SyntaxHighlighter>
             </pre>

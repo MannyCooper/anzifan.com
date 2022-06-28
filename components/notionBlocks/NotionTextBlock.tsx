@@ -11,7 +11,7 @@ export function NotionText({ text, inheritColor }: { text: any, inheritColor?: b
 
         const className = [
             bold ? 'font-semibold' : '',
-            code ? `font-mono text-sm px-1 bg-light-600 rounded-md px-2 py-0.5 ${Colors["pink"]?.text.normal} dark:bg-dark-600` : '',
+            code ? `font-mono text-sm px-1 bg-light-600 rounded-md px-2 py-0.5 ${Colors["purple"]?.text.normal} dark:bg-dark-600` : '',
             italic ? 'italic' : '',
             strikethrough ? 'line-through' : '',
             underline ? 'underline' : '',
