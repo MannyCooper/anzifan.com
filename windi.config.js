@@ -23,6 +23,9 @@ export default defineConfig({
       'lg': '1068px',
     },
     extend: {
+      scale: {
+        flip: '-1',
+      },
       boxShadow: {
         '2xl-middle': '0 0 20px -5px rgba(24, 23, 23, 1)',
         'lg-middle' : '0 0 20px -3px rgb(0 0 0 / 0.1)'

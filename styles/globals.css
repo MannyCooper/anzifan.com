@@ -28,3 +28,11 @@ a {
 img {
   transition: 0.5s;
 }
+
+.tk-expand {
+  background-color: rgb(245, 245, 245) !important;
+  border-radius: 15px;
+}
+.dark .tk-expand {
+  background-color: rgb(23, 23, 23) !important;
+}

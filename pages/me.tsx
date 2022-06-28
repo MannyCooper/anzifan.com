@@ -63,7 +63,7 @@ const Overview = () => {
     };
 
     return (
-        <div className="grid grid-cols-2 gap-3 md:gap-6 select-none">
+        <div className="grid grid-cols-2 gap-3 select-none md:gap-6">
             <div data-aos="fade-up" data-aos-duration="800" className={`${style} bg-gradient-to-br from-[#ffa0a8] to-[#fffcdc] text-white`}
             // style={{ background: "linear-gradient(135deg, #ffa0a8, #fffcdc)" }}
             // style={{ background:"linear-gradient(90deg, rgba(255,167,69,1) 0%, rgba(254,134,159,1) 25%, rgba(239,122,200,1) 50%, rgba(160,131,237,1) 75%, rgba(67,174,255,1) 100%)"}}
@@ -134,11 +134,11 @@ const Overview = () => {
                 <LocationMap />
             </div>
             <div data-aos="fade-up" data-aos-duration="800" className={`${style} col-span-2 gap-3  relative !flex-row items-center`}>
-                <p className="text-sm font-semibold text-left xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl z-10 whitespace-nowrap">
+                <p className="z-10 text-sm font-semibold text-left xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl whitespace-nowrap">
                     Find me on 👉
                 </p>
-                {/* <div className="bg-indigo-200 w-full absolute h-5/7 sm:h-3/5 z-0 bottom-0 left-0"/> */}
-                <div className="text-white flex  justify-center items-center gap-0 sm:gap-1 md:gap-1 lg:gap-2 my-4">
+                {/* <div className="absolute bottom-0 left-0 z-0 w-full bg-indigo-200 h-5/7 sm:h-3/5"/> */}
+                <div className="flex items-center justify-center gap-0 my-4 text-white sm:gap-1 md:gap-1 lg:gap-2">
                     {
                         social.map((s: any) =>
                             <a last-after="absolute content-. text-transparent  w-4 h-4 rounded-full bg-red-500 right-0 top-0" last-before="absolute content-. text-transparent  w-4 h-4 animate-ping  rounded-full bg-red-400 right-0 top-0" target="_blank" rel="noopener noreferrer" className={`relative shadow-inner translate-y-5 even:(-translate-y-5) -ml-3 sm:ml-0  rounded-full p-3 sm:p-4 md:p-5 lg:p-6  flex justify-center items-center transform transition ease-in-out duration-200 hover:scale-105 md:hover:scale-95 aspect-ratio h-full bg-gradient-to-tr text-white  shadow-lg-middle dark:shadow-none ${s.shadow} ${s.color} `} href={s.url} key={s.name}>
@@ -154,10 +154,10 @@ const Overview = () => {
                     <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8  text-sm font-semibold text-left xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl z-50 line-clamp-1 text-transparent`}>Technical Skills</p>
                     <div className="flex flex-col justify-end items-start w-full p-4 xs:p-4.5 sm:p-6 md:p-8 gap-3 lg: gap-4">
                         {skills.map((skill: any, index: number) =>
-                            <div className="flex gap-1 lg:gap-3 flex-wrap" key={index}>
+                            <div className="flex flex-wrap gap-1 lg:gap-3" key={index}>
                                 {
                                     skill.map((s: any, i: number) =>
-                                        <div className="text-xs xs:text-sm md:text-normal lg:text-lg flex flex-row place-items-center gap-1" key={s.name + i.toString()}>
+                                        <div className="flex flex-row gap-1 text-xs xs:text-sm md:text-normal lg:text-lg place-items-center" key={s.name + i.toString()}>
                                             <s.icon className={`w-3 h-3 lg:(w-5 h-5) p-1 rounded-full ${s.color}`} />
                                             {s.name}
                                         </div>
@@ -189,7 +189,7 @@ const Overview = () => {
                         )
                     }
                     {/* <div className="slider">
-                        <div className="slide-track  animate-scroll-lg duration-1000 ease-linear">
+                        <div className="duration-1000 ease-linear slide-track animate-scroll-lg">
                             {Array(20).fill(0).map((_, index) => skills[0][index % skills[0].length]).map(s =>
                                 <div className={`slide ${s.color}`} key={s.name}>
                                     <s.icon size="50"></s.icon>
@@ -197,8 +197,8 @@ const Overview = () => {
                             }
                         </div>
                     </div>
-                    <div className="slider my-2">
-                        <div className="slide-track animate-scroll-lg duration-1000 ease-linear">
+                    <div className="my-2 slider">
+                        <div className="duration-1000 ease-linear slide-track animate-scroll-lg">
                             {Array(20).fill(0).map((_, index) => skills[1][index % skills[1].length]).map(s =>
                                 <div className={`slide ${s.color} transform -translate-x-15`} key={s.name}>
                                     <s.icon size="50"></s.icon>
@@ -207,7 +207,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div className="slider">
-                        <div className="slide-track animate-scroll-lg duration-1000 ease-linear">
+                        <div className="duration-1000 ease-linear slide-track animate-scroll-lg">
                             {Array(20).fill(0).map((_, index) => skills[2][index % skills[2].length]).map(s =>
                                 <div className={`slide ${s.color}`} key={s.name}>
                                     <s.icon size="50"></s.icon>
@@ -221,13 +221,13 @@ const Overview = () => {
                 <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8 text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1`}>
                     Educations
                 </p>
-                <div className="h-full flex flex-col justify-between mt-1 mb-8 ">
+                <div className="flex flex-col justify-between h-full mt-1 mb-8 ">
                     <div className="p-4 xs:p-4.5 sm:p-6 md:p-8 !pt-0 mb-10 sm:mb-8">
                         {
                             education.map((edu) =>
                                 <div className="flex items-center gap-2" key={edu.name}>
                                     <div className={`${Colors[edu.color].bg.msg} aspect-square h-3 rounded-full lg:h-4`} />
-                                    <p className="text-true-gray-400 text-sm lg:text-lg">{edu.degree}</p>
+                                    <p className="text-sm text-true-gray-400 lg:text-lg">{edu.degree}</p>
                                 </div>
                             )
                         }
@@ -235,7 +235,7 @@ const Overview = () => {
                     <div className="flex flex-col h-full items-center justify-end pb-4 xs:pb-4.5 sm:pb-6 md:pb-8">
                         <div className="bg-true-gray-300 w-full h-1.5 relative" >
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
-                                <div className="col-span-5 flex flex-col gap-1 lg:gap-2">
+                                <div className="flex flex-col col-span-5 gap-1 lg:gap-2">
                                     <a className="filter hover:brightness-110" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-DEFAULT text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
                                     </a>
@@ -244,22 +244,22 @@ const Overview = () => {
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
-                                <a className="filter hover:brightness-130 col-span-3" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
+                                <a className="col-span-3 filter hover:brightness-130" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
                                     <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
                         <div className="w-full px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 text-true-gray-300">
-                            <div className="flex flex-col justify-center items-stretch col-span-4">
+                            <div className="flex flex-col items-stretch justify-center col-span-4">
                                 <div className="mt-1 h-10 w-0.5 bg-true-gray-300 relative rounded-full" after="content-2016 absolute -bottom-6 -left-4" />
                             </div>
-                            <div className="flex flex-col justify-center items-end">
+                            <div className="flex flex-col items-end justify-center">
                                 <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2020 absolute -bottom-6 -left-4" />
                             </div>
-                            <div className="flex flex-col justify-center items-end col-span-2">
+                            <div className="flex flex-col items-end justify-center col-span-2">
                                 <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2021 absolute -bottom-6 -left-4" />
                             </div>
-                            <div className="flex flex-col justify-center items-end col-span-3">
+                            <div className="flex flex-col items-end justify-center col-span-3">
                                 <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2022 absolute -bottom-6 -left-6 sm:-left-4" />
                             </div>
                         </div>
@@ -404,7 +404,7 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
         <>
             <ListLayout >
                 <div data-aos="fade-up" className="flex flex-col items-center messages">
-                    <div className="rounded-full aspect-square h-30 xs:h-35 md:h-40 my-4 xs:my-8 md:mt-10 relative overflow-hidden">
+                    <div className="relative my-4 overflow-hidden rounded-full aspect-square h-30 xs:h-35 md:h-40 xs:my-8 md:mt-10">
                         <Image src="/static/images/portrait.png" layout='fill' objectFit="cover" alt="Portrait" />
                     </div>
                     <h1 className="pb-4 text-4xl font-bold text-center md:text-6xl">About Me 🌍</h1>

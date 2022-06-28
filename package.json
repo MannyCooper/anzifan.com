@@ -45,6 +45,7 @@
     "sharethis-reactjs": "^1.6.0",
     "sharp": "^0.30.5",
     "swr": "^1.1.2",
+    "transliteration": "^2.2.0",
     "twikoo": "^1.5.11",
     "unfurl.js": "^5.6.2"
   },

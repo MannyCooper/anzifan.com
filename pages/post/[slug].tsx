@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { getAllBlocks, getDatabase, getPage } from "../../lib/notion"
-import { Fragment, useEffect, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { renderNotionBlock } from "../../components/NotionBlockRenderer"
 import ContentLayout, { CoverLayout } from "../../components/layout/ContentLayout"
 import Head from "next/head"
@@ -32,10 +32,11 @@ import readingTime from "reading-time";
 import PostSeo from "../../components/PostSeo";
 import { useRouter } from "next/router";
 
-const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any }> = ({ page, blocks, pagination, posts }) => {
+const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any; setToc : Dispatch<SetStateAction<any>> }> = ({ page, blocks, pagination, posts, setToc }) => {
     const { text } = readingTime(blocks.map(b => b.paragraph?.text?.map((t: any) => t.text?.content)).join(""));
     const router = useRouter();
     const { locale } = router;
+    setToc(blocks)
     if (!page || !blocks) {
         return <>
             <Head>
@@ -57,7 +58,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                                 <p className={`inline-block mb-2 text-xs font-bold text-true-gray-600 leading-2 ${Colors[page.category.color].text.normal} `}>{page.category.name}</p>
                             </a>
                         </Link>
-                        <div className="flex flex-row space-x-2 items-center mt-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400">
+                        <div className="flex flex-row items-center mt-2 space-x-2 text-sm font-semibold text-true-gray-600 dark:text-true-gray-400">
                             <Moment date={page.date} fromNow
                                 // format="MMM DD, yy"
                                 format="yyyy 年 MM 月 DD 日"
@@ -76,7 +77,7 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                 </header>
             </ContentLayout>
             <CoverLayout>
-                <div className="md:rounded-3xl relative w-full h-full" data-aos="fade-up" data-aos-duration="500">
+                <div className="relative w-full h-full md:rounded-3xl" data-aos="fade-up" data-aos-duration="500">
                     <ThemedImage className="z-0 overflow-hidden transition-all duration-500 ease-in-out md:rounded-3xl" post={page} />
                 </div>
             </CoverLayout>
@@ -90,13 +91,13 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                 <div className={`flex flex-col mt-8 justify-between ${page.originalCover ? "md:flex-row-reverse md:items-center" : ""} gap-4 w-full`}>
                     {page.originalCover ?
                         <a href="mailto:541297173@qq.com">
-                            <div className="whitespace-nowrap  rounded-full px-2 py-1 space-x-2 bg-true-gray-100 text-true-gray-800 text-sm inline-block" dark="bg-true-gray-800 text-true-gray-100">
+                            <div className="inline-block px-2 py-1 space-x-2 text-sm rounded-full whitespace-nowrap bg-true-gray-100 text-true-gray-800" dark="bg-true-gray-800 text-true-gray-100">
                                 <FontAwesomeIcon icon={faPalette} />
                                 <span>原创封面图，请勿盗用</span>
                             </div>
                         </a> : null}
                     {/* Tags */}
-                    <div className="flex gap-2 items-center overflow-scroll scrollbar-hide flex-wrap">
+                    <div className="flex flex-wrap items-center gap-2 overflow-scroll scrollbar-hide">
                         <TagsIcon />
                         {page.tags.map((tag: any) =>
                             <Link href={`/tag/${tag.name}`} as={`/tag/${tag.name}`} key={tag.name}>
@@ -111,23 +112,28 @@ const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: an
                 </div>
                 <Licensing page={page} data-aos="fade-up" data-aos-duration="500" />
                 <Pagination pagination={pagination} data-aos="fade-up" data-aos-duration="500"></Pagination>
-                {/* <Reaction /> */}
             </ContentLayout>
             <ContentLayout>
-                <MediaContextProvider >
-                    <Media greaterThanOrEqual="sm" className="grid grid-cols-2 md:grid-cols-2 gap-4">
-                        {/* <WidgetMeSmall />
-                        <WidgetOverViewSmall posts=1{posts} /> */}
+                {/* <div className="grid grid-cols-2 gap-4 md:grid-cols-2"> */}
+                <div className="hidden grid-cols-2 gap-4 sm:grid md:grid-cols-2">
+                    <WidgetMeMedium fix={true} />
+                    <WidgetOverViewMedium posts={posts} fix={true} />
+                </div>
+                <div className="grid grid-cols-2 gap-4 sm:hidden md:grid-cols-2">
+                    <WidgetMeSmall />
+                    <WidgetOverViewSmall posts={posts} />
+                </div>
+                {/* </div> */}
+                {/* <MediaContextProvider >
+                    <Media greaterThanOrEqual="sm" className="grid grid-cols-2 gap-4 md:grid-cols-2">                       
                         <WidgetMeMedium fix={true} />
                         <WidgetOverViewMedium posts={posts} fix={true} />
                     </Media>
-                    <Media lessThan="sm" className="grid grid-cols-2 gap-2">
-                        {/* <WidgetMeMedium />
-                        <WidgetOverViewMedium posts={posts} /> */}
+                    <Media lessThan="sm" className="grid grid-cols-2 gap-2">                        
                         <WidgetMeSmall />
                         <WidgetOverViewSmall posts={posts} />
                     </Media>
-                </MediaContextProvider>
+                </MediaContextProvider> */}
             </ContentLayout>
             <ContentLayout>
                 <Comment />

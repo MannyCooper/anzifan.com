@@ -6,6 +6,7 @@ import NotionBookmark from "./notionBlocks/NotionBookmark";
 import NotionCode from "./notionBlocks/NotionCode";
 import NotionCallout from "./notionBlocks/NotionCallout";
 import NotionQuote from "./notionBlocks/NotionQuote";
+import { slugify } from 'transliteration'
 
 export function renderNotionBlock(block: any) {
     const { type, id } = block
@@ -21,21 +22,21 @@ export function renderNotionBlock(block: any) {
 
         case 'heading_1':
             return (
-                <h1 className="mt-12 mb-5 text-2xl font-bold leading-7 ">
+                <h1 id={slugify(value.text[0].text.content).replace(/[^A-Za-z0-9]/g, '-')} className="mt-12 mb-5 text-2xl font-bold leading-7 snap-mt-20">
                     <NotionText text={value.text} />
                 </h1>
             )
 
         case 'heading_2':
             return (
-                <h2 className="mt-5 mb-4 text-xl font-bold leading-7 ">
+                <h2 id={slugify(value.text[0].text.content).replace(/[^A-Za-z0-9]/g, '-')} className="mt-5 mb-4 text-xl font-bold leading-7 snap-mt-16">
                     <NotionText text={value.text} />
                 </h2>
             )
 
         case 'heading_3':
             return (
-                <h3 className="mt-4 mb-3 text-lg font-bold leading-7 ">
+                <h3 id={slugify(value.text[0].text.content).replace(/[^A-Za-z0-9]/g, '-')} className="mt-4 mb-3 text-lg font-bold leading-7 snap-mt-16">
                     <NotionText text={value.text} />
                 </h3>
             )

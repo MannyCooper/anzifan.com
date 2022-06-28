@@ -30,7 +30,7 @@ library.add(fab)
 
 declare global {
   interface Window {
-    _hmt:any;
+    _hmt: any;
   }
 }
 
@@ -45,9 +45,9 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
 
     const handleRouteChange = (url: string) => {
       pageview(url, document.title);
-      try{
+      try {
         window._hmt.push(['_trackPageview', url]);
-      } catch (e){}
+      } catch (e) { }
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
