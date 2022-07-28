@@ -39,9 +39,10 @@ export const links : readonly [LinkType, LinkType, LinkType, LinkType, LinkType]
         name: "少数派"
     },
     {
+        // # banned
         url: 'https://www.zhihu.com/people/an-zi-fan-62',
         icon: Zhihu,
-        color: 'from-bg-[#0466FF] to-bg-[#03A1FF]',
+        color: 'from-true-gray-400 to-true-gray-300 dark:(from-true-gray-600 to-true-gray-500)',
         fill: "fill-[#0084FF]",
         border: "border-[#0084FF]",
         shadow: "shadow-blue-300",
