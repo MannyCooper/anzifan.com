@@ -34,5 +34,10 @@ export const friends : FriendType[] = [
         url: 'https://blog.ccknbc.cc',
         name: 'CC康纳百川',
         img: 'https://cdn.jsdelivr.net/gh/ccknbc-backup/cdn@latest/logo/ccknbc.png'
+    },
+    {
+        url: 'https://blog.zhheo.com/',
+        name: '张洪Heo',
+        img: 'https://img.zhheo.com/i/2022/08/19/62ff32fa28da1.png'
     }
 ]
