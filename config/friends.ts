@@ -39,5 +39,10 @@ export const friends : FriendType[] = [
         url: 'https://blog.zhheo.com/',
         name: '张洪Heo',
         img: 'https://img.zhheo.com/i/2022/08/19/62ff32fa28da1.png'
+    },
+    {
+        url: 'https://aohuiliu.fun',
+        name: 'Aohui',
+        img: 'https://www.aohuiliu.fun/images/avatar.jpeg'
     }
 ]
