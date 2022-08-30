@@ -44,5 +44,10 @@ export const friends : FriendType[] = [
         url: 'https://aohuiliu.fun',
         name: 'Aohui',
         img: 'https://www.aohuiliu.fun/images/avatar.jpeg'
+    },
+    {
+        url: 'https://rxhsk.xicp.fun',
+        name: 'Hello',
+        img: 'https://rxhsk.xicp.fun/img/avatar.png'
     }
 ]
