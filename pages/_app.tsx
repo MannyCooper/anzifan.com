@@ -61,7 +61,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     <ThemeProvider attribute="class">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <title>异次元の机智君</title>
+        <title>安子璠的个人博客</title>
         <meta name="description" content="异次元の机智君" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
