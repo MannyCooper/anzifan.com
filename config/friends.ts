@@ -50,4 +50,9 @@ export const friends: FriendType[] = [
     name: 'Hello',
     img: 'https://rxhsk.xicp.fun/img/avatar.png',
   },
+  {
+    url: 'https://www.fomal.cc',
+    name: 'Fomalhaut🥝',
+    img: 'https://www.fomal.cc/assets/head.jpg',
+  },
 ]
