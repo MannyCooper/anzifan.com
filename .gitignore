@@ -43,3 +43,9 @@ yarn-error.log*
 **/public/sw.js.map
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
+.vscode/launch.json
+.vscode/settings.json
+target/npmlist.json
+yarn.lock
+package-lock.json
+.gitignore
