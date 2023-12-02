@@ -14,12 +14,9 @@ export function DynamicIcon({
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .split(' ')[0]
     .toLocaleLowerCase()
-  const ElementIcon: React.ComponentType<IconBaseProps> = loadable(
-    () => import(`react-icons/${lib}/index.js`),
-    {
-      resolveComponent: (el: JSX.Element) => el[nameIcon as keyof JSX.Element],
-    }
-  )
+  const ElementIcon = loadable(() => import(`react-icons/${lib}/index.js`), {
+    resolveComponent: (el: JSX.Element) => el[nameIcon as keyof JSX.Element],
+  }) as React.ComponentType<IconBaseProps>
 
   return <ElementIcon {...propsIcon} />
 }
