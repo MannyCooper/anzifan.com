@@ -1,0 +1,11 @@
+{
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "useTabs": false,
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
+    "pluginSearchDirs": false
+}

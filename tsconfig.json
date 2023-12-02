@@ -13,8 +13,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/layout/BlogLayout.js", "pages/api/page-views/page-views.js"],
+  "include": ["next-env.d.ts", "tailwind.config.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

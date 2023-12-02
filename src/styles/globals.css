@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.unblur {
+  animation: unblur 0.5s ease-in-out;
+  background-image: none !important;
+}
+
+@keyframes unblur {
+  from {
+    filter: blur(20px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+svg, input {
+  flex-shrink: 0;
+}
+
+pre {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+pre code>span{
+  margin-left: 1.25rem;
+}
+
+pre code>span::before {
+  content: counter(step);
+  counter-increment: step;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+  margin-top: -0.15rem;
+  display: inline-block;
+  color: rgba(115,138,148,.4);
+  position: absolute;
+  left:0;
+  @apply bg-[#f9fafa] dark:bg-neutral-900 border-l border-neutral-100 dark:border-neutral-700
+}
+
+::selection {
+  background-color: #fff7c080;
+}
+
+.dark ::selection {
+  background-color: #69655090;
+}
+
+@layer components {
+  code.brown_background {
+    @apply bg-amber-50 dark:bg-[#311607]
+  }
+  code.orange_background {
+    @apply bg-orange-50 dark:bg-[#321209]
+  }
+  code.yellow_background {
+    @apply bg-yellow-50 dark:bg-[#2d1908]
+  }
+  code.green_background {
+    @apply bg-green-50 dark:bg-[#0a2212]
+  }
+  code.red_background {
+    @apply bg-red-50 dark:bg-[#3d1515]
+  }
+  code.blue_background {
+    @apply bg-blue-50 dark:bg-[#0d1737]
+  }
+  code.purple_background {
+    @apply bg-indigo-50 dark:bg-[#131234]
+  }
+  code.pink_background {
+    @apply bg-rose-50 dark:bg-[#350b1b]
+  }
+  code.gray_background {
+    @apply bg-neutral-50 dark:bg-[#1c1c1e]
+  }
+
+  code.brown_background> span::before {
+    @apply bg-amber-50 dark:bg-[#311607]
+  }
+  code.orange_background> span::before {
+    @apply bg-orange-50 dark:bg-[#321209]
+  }
+  code.yellow_background> span::before {
+    @apply bg-yellow-50 dark:bg-[#2d1908]
+  }
+  code.green_background> span::before {
+    @apply bg-green-50 dark:bg-[#0a2212]
+  }
+  code.red_background> span::before {
+    @apply bg-red-50 dark:bg-[#3d1515]
+  }
+  code.blue_background> span::before {
+    @apply bg-blue-50 dark:bg-[#0d1737]
+  }
+  code.purple_background> span::before {
+    @apply bg-indigo-50 dark:bg-[#131234]
+  }
+  code.pink_background> span::before {
+    @apply bg-rose-50 dark:bg-[#350b1b]
+  }
+  code.gray_background> span::before {
+    @apply bg-neutral-50 dark:bg-[#1c1c1e]
+  }
+}
+
+.el-loading-spinner{
+  left: 50%;
+  width: auto;
+}
+
+.tk-content img{
+  cursor: pointer;
+  @apply transition-all duration-300 ease-in-out
+}
+
+.tk-content img:hover{
+  max-width: 100%;
+}
+
+.tk-expand {
+  background-color: rgb(245, 245, 245) !important;
+  border-radius: 15px;
+  margin-top: 0.5rem;
+}
+.dark .tk-expand {
+  background-color: rgb(23, 23, 23) !important;
+}
+
+.tk-extra-text {
+  display: none;
+}
