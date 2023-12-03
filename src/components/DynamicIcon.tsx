@@ -18,5 +18,5 @@ export function DynamicIcon({
     resolveComponent: (el: JSX.Element) => el[nameIcon as keyof JSX.Element],
   }) as React.ComponentType<IconBaseProps>
 
-  return <ElementIcon {...propsIcon} />
+  return (<ElementIcon {...propsIcon} />) as React.ReactElement<any, any>
 }
