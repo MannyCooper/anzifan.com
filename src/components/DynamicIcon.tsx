@@ -6,17 +6,17 @@ type DynamicIconType = {
   propsIcon?: IconBaseProps
 }
 
-export function DynamicIcon({
-  nameIcon,
-  propsIcon,
-}: DynamicIconType): JSX.Element {
+export function DynamicIcon({ nameIcon, propsIcon }: DynamicIconType) {
   const lib = nameIcon
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .split(' ')[0]
-    .toLocaleLowerCase()
-  const ElementIcon = loadable(() => import(`react-icons/${lib}/index.js`), {
-    resolveComponent: (el: JSX.Element) => el[nameIcon as keyof JSX.Element],
-  }) as React.ComponentType<IconBaseProps>
+    .toLowerCase()
 
-  return (<ElementIcon {...propsIcon} />) as React.ReactElement<any, any>
+  const ElementIcon = loadable(() =>
+    import(`react-icons/${lib}/index.js`).then((module) => ({
+      default: module[nameIcon as keyof typeof module],
+    }))
+  ) as React.ComponentType<IconBaseProps>
+
+  return <ElementIcon {...propsIcon} />
 }
