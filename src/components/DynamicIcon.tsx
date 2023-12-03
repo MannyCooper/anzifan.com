@@ -1,4 +1,4 @@
-import loadable from '@loadable/component'
+import React, { Suspense } from 'react'
 import { IconBaseProps } from 'react-icons/lib'
 
 type DynamicIconType = {
@@ -12,11 +12,15 @@ export function DynamicIcon({ nameIcon, propsIcon }: DynamicIconType) {
     .split(' ')[0]
     .toLowerCase()
 
-  const ElementIcon = loadable(() =>
+  const ElementIcon = React.lazy(() =>
     import(`react-icons/${lib}/index.js`).then((module) => ({
       default: module[nameIcon as keyof typeof module],
     }))
-  ) as React.ComponentType<IconBaseProps>
+  )
 
-  return <ElementIcon {...propsIcon} />
+  return (
+    <Suspense fallback={<div>...</div>}>
+      <ElementIcon {...propsIcon} />
+    </Suspense>
+  )
 }
