@@ -5,6 +5,7 @@ import {
   GetDatabaseResponse,
   PageObjectResponse,
   PartialDatabaseObjectResponse,
+  PartialPageObjectResponse,
   QueryDatabaseResponse,
   RichTextItemResponse,
 } from '@notionhq/client/build/src/api-endpoints'
@@ -119,23 +120,21 @@ export const getDatabaseProperties = async (): Promise<
 
 function addObjects(
   results: QueryDatabaseResponse['results'],
-  objects: PageObjectResponse[],
+  objects: PageObjectResponse[] | PartialPageObjectResponse[],
   filter?: ContentType,
   limit?: number
 ) {
   results.forEach((object) => {
-    if (isFullPage(object)) {
-      if (limit) {
-        if (objects.length >= limit) {
-          return
-        }
+    if (object.object === 'page' && isFullPage(object)) {
+      if (limit && objects.length >= limit) {
+        return
       }
       if (
         !filter ||
         (object.properties.type.type === 'select' &&
           object.properties.type.select?.name === filter)
       ) {
-        objects.push(object)
+        objects.push(object as PageObjectResponse)
       }
     }
   })

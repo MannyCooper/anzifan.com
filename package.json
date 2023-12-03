@@ -26,7 +26,7 @@
     "@google-analytics/data": "^3.2.1",
     "@headlessui/react": "^1.4.2",
     "@loadable/component": "^5.15.3",
-    "@notionhq/client": "^2.2.3",
+    "@notionhq/client": "^2.2.13",
     "@pixi/react": "^7.0.3",
     "@plaiceholder/next": "^2.2.0",
     "@tailwindcss/line-clamp": "^0.4.2",
