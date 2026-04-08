@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client'
 import { Post } from './types'
+import { normalizeAssetUrl } from './normalizeAssetUrl'
 
 const notion = new Client({ auth: process.env.NOTION_KEY })
 const databaseId = process.env.NOTION_DATABASE_ID || '7fddb522451e4ac68922d1515da1f5f4'
@@ -60,8 +61,8 @@ export const getDatabase = async (slug?: string) => {
             const updateDate = properties.UpdateDate.type === "last_edited_time" && properties.UpdateDate.last_edited_time
 
             const undefinedCover = "https://cdn.dribbble.com/users/3167939/screenshots/10422336/media/b618a0e73996c3b24b58b2db1c881ee3.png"
-            const cover_light = properties.Cover.type === "url" && properties.Cover.url || undefinedCover
-            const cover_dark = properties.Cover_dark.type === "url" && properties.Cover_dark.url || cover_light
+            const cover_light = normalizeAssetUrl(properties.Cover.type === "url" && properties.Cover.url || undefinedCover)
+            const cover_dark = normalizeAssetUrl(properties.Cover_dark.type === "url" && properties.Cover_dark.url || cover_light)
             const cover = { light: cover_light, dark: cover_dark }
 
             const category = properties.Category.type === "select" && { name: properties.Category.select?.name, color: properties.Category.select?.color }
