@@ -2,8 +2,8 @@ import { GetStaticProps, NextPage } from "next"
 import PostList from "../../components/PostList"
 import { getDatabase } from "../../lib/notion"
 import { Post, Tag } from "../../lib/types"
-import { getPlaiceholder } from "plaiceholder";
 import { ParsedUrlQuery } from "querystring";
+import { getImageBlurDataURL } from "../../lib/imagePlaceholders";
 
 const TagPage: NextPage<{ posts: Post[], tag: Tag }> = ({ posts, tag }) => {
 
@@ -45,12 +45,8 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     for (let post of db) {    
       if (post) {
         try {
-        post.cover.blurLight = (await getPlaiceholder(post.cover.light, {
-          size: 10,
-        })).base64
-        post.cover.blurDark = (await getPlaiceholder(post.cover.dark, {
-          size: 10,       
-        })).base64
+        post.cover.blurLight = await getImageBlurDataURL(post.cover.light)
+        post.cover.blurDark = await getImageBlurDataURL(post.cover.dark)
       } catch (e) {
         post.cover.blurLight = ''
         post.cover.blurDark = ''
