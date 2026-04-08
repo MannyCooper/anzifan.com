@@ -2,6 +2,7 @@ import { getMediaCtx } from "../../lib/getMediaCtx"
 import Image from "next/image"
 import { NotionText } from "./NotionTextBlock"
 import { useState } from "react"
+import { shouldBypassImageOptimization } from "../../lib/shouldBypassImageOptimization"
 
 const NotionImage = ({ value }: { value: any }) => {
     let { src: imageSrc, caption: imageCaption, expire } = getMediaCtx(value)
@@ -25,6 +26,7 @@ const NotionImage = ({ value }: { value: any }) => {
     // };
 
     imageSrc = imageSrc.split('?')[0]
+    const unoptimized = shouldBypassImageOptimization(imageSrc)
 
     return (
         <figure className="mx-auto my-6 max-w-11/12 rounded-2xl" data-aos="fade-up" data-aos-duration="800" >
@@ -40,8 +42,9 @@ const NotionImage = ({ value }: { value: any }) => {
                         <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height}
                             placeholder="blur"
                             blurDataURL={value.blur}
+                            unoptimized={unoptimized}
                         // onLoad={handleLoad}
-                        /> : <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} /> : <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} />
+                        /> : <Image className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} unoptimized={unoptimized} /> : <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} width={width} height={height} />
                 ) : (
                     <img className="rounded-2xl overflow-hidden" src={imageSrc} alt={imageCaption} />
                 )}
