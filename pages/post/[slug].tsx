@@ -31,6 +31,7 @@ import { Post } from "../../lib/types";
 import readingTime from "reading-time";
 import PostSeo from "../../components/PostSeo";
 import { useRouter } from "next/router";
+import { normalizeAssetUrl } from "../../lib/normalizeAssetUrl";
 
 const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any; setToc : Dispatch<SetStateAction<any>> }> = ({ page, blocks, pagination, posts, setToc }) => {
     const { text } = readingTime(blocks.map(b => b.paragraph?.text?.map((t: any) => t.text?.content)).join(""));
@@ -233,7 +234,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             .map(async b => {
                 const { type } = b
                 const value = b[type]
-                const src = value.type === 'external' ? value.external.url : value.file.url
+                const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
                 const { width, height } = await probeImageSize(src)
                 const blur = (await getPlaiceholder(src, {
                     size: 10,
@@ -255,7 +256,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                         .map(async (b: any) => {
                             const { type } = b
                             const value = b[type]
-                            const src = value.type === 'external' ? value.external.url : value.file.url
+                            const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
                             const { width, height } = await probeImageSize(src)
                             const blur = (await getPlaiceholder(src, {
                                 size: 10,
@@ -282,7 +283,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                                     .map(async (b: any) => {
                                         const { type } = b
                                         const value = b[type]
-                                        const src = value.type === 'external' ? value.external.url : value.file.url
+                                        const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
                                         const { width, height } = await probeImageSize(src)
                                         const blur = (await getPlaiceholder(src, {
                                             size: 10,
