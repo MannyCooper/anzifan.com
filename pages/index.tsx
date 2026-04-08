@@ -9,7 +9,6 @@ import { getDatabase } from '../lib/notion'
 import PostList from '../components/PostList'
 import { Post } from '../lib/types'
 
-import { getPlaiceholder } from "plaiceholder";
 import { WidgetMeMedium, WidgetMeSmall } from '../components/widget/WidgetMe'
 import ListLayout from '../components/layout/ListLayout'
 import { WidgetOverViewMedium, WidgetOverViewSmall } from '../components/widget/WidgetOverview'
@@ -17,6 +16,7 @@ import { Media, MediaContextProvider } from '../components/utility/Breakpoints'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { me } from '../config/me'
+import { getImageBlurDataURL } from '../lib/imagePlaceholders'
 
 // type PostResult = QueryDatabaseResponse['results'][number];
 
@@ -67,12 +67,8 @@ export const getStaticProps: GetStaticProps = async () => {
   for (let post of db) {
     if (post) {
       try {
-        post.cover.blurLight = (await getPlaiceholder(post.cover.light, {
-          size: 10,
-        })).base64
-        post.cover.blurDark = (await getPlaiceholder(post.cover.dark, {
-          size: 10,
-        })).base64
+        post.cover.blurLight = await getImageBlurDataURL(post.cover.light)
+        post.cover.blurDark = await getImageBlurDataURL(post.cover.dark)
       } catch (e) {
         post.cover.blurLight = ''
         post.cover.blurDark = ''

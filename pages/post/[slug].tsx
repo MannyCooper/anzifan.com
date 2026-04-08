@@ -6,14 +6,12 @@ import { renderNotionBlock } from "../../components/NotionBlockRenderer"
 import ContentLayout, { CoverLayout } from "../../components/layout/ContentLayout"
 import Head from "next/head"
 import DefaultErrorPage from 'next/error'
-import probeImageSize from "../../lib/probeImageSize"
 import { BlogLayoutWhite } from "../../components/layout/BlogLayout"
 import type { ReactElement } from 'react'
 import { NextPageWithLayout } from "../_app"
 import Moment from "react-moment"
 import Link from "next/link"
 import { Colors } from "../../lib/colors"
-import { getPlaiceholder } from "plaiceholder";
 import { Share } from "../../components/Share";
 import Licensing from "../../components/Licensing";
 import TagsIcon from '../../assets/tags.svg'
@@ -32,6 +30,7 @@ import readingTime from "reading-time";
 import PostSeo from "../../components/PostSeo";
 import { useRouter } from "next/router";
 import { normalizeAssetUrl } from "../../lib/normalizeAssetUrl";
+import { getImageBlurDataURL, getImageMetadata } from "../../lib/imagePlaceholders";
 
 const PostPage: NextPage<{ page: Post; blocks: any[]; pagination: any; posts: any; setToc : Dispatch<SetStateAction<any>> }> = ({ page, blocks, pagination, posts, setToc }) => {
     const { text } = readingTime(blocks.map(b => b.paragraph?.text?.map((t: any) => t.text?.content)).join(""));
@@ -170,22 +169,28 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const prev = db[pageIndex - 1] || null
     const next = db[pageIndex + 1] || null
 
+    const setCoverBlur = async (post: Post | null) => {
+        if (!post) return
+
+        try {
+            post.cover.blurLight = await getImageBlurDataURL(post.cover.light)
+        } catch (error) {
+            post.cover.blurLight = ''
+        }
+
+        try {
+            post.cover.blurDark = await getImageBlurDataURL(post.cover.dark)
+        } catch (error) {
+            post.cover.blurDark = ''
+        }
+    }
+
     if (prev) {
-        prev.cover.blurLight = (await getPlaiceholder(prev.cover.light, {
-            size: 10,
-        })).base64
-        prev.cover.blurDark = (await getPlaiceholder(prev.cover.dark, {
-            size: 10,
-        })).base64
+        await setCoverBlur(prev)
     }
 
     if (next) {
-        next.cover.blurLight = (await getPlaiceholder(next.cover.light, {
-            size: 10,
-        })).base64
-        next.cover.blurDark = (await getPlaiceholder(next.cover.dark, {
-            size: 10,
-        })).base64
+        await setCoverBlur(next)
     }
 
     const pagination: any = {
@@ -197,12 +202,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 
     if (page) {
-        page.cover.blurLight = (await getPlaiceholder(page.cover.light, {
-            size: 10,
-        })).base64
-        page.cover.blurDark = (await getPlaiceholder(page.cover.dark, {
-            size: 10,
-        })).base64
+        await setCoverBlur(page)
     }
 
 
@@ -235,12 +235,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 const { type } = b
                 const value = b[type]
                 const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
-                const { width, height } = await probeImageSize(src)
-                const blur = (await getPlaiceholder(src, {
-                    size: 10,
-                })).base64
-                value['size'] = { width, height }
-                value['blur'] = blur
+                try {
+                    const { width, height, blur } = await getImageMetadata(src)
+                    value['size'] = { width, height }
+                    value['blur'] = blur
+                } catch (error) {
+                    value['size'] = { width: 0, height: 0 }
+                    value['blur'] = ''
+                }
                 b[type] = value
             })
     )
@@ -257,12 +259,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                             const { type } = b
                             const value = b[type]
                             const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
-                            const { width, height } = await probeImageSize(src)
-                            const blur = (await getPlaiceholder(src, {
-                                size: 10,
-                            })).base64
-                            value['size'] = { width, height }
-                            value['blur'] = blur
+                            try {
+                                const { width, height, blur } = await getImageMetadata(src)
+                                value['size'] = { width, height }
+                                value['blur'] = blur
+                            } catch (error) {
+                                value['size'] = { width: 0, height: 0 }
+                                value['blur'] = ''
+                            }
                             b[type] = value
                         })
             })
@@ -284,12 +288,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                                         const { type } = b
                                         const value = b[type]
                                         const src = normalizeAssetUrl(value.type === 'external' ? value.external.url : value.file.url)
-                                        const { width, height } = await probeImageSize(src)
-                                        const blur = (await getPlaiceholder(src, {
-                                            size: 10,
-                                        })).base64
-                                        value['size'] = { width, height }
-                                        value['blur'] = blur
+                                        try {
+                                            const { width, height, blur } = await getImageMetadata(src)
+                                            value['size'] = { width, height }
+                                            value['blur'] = blur
+                                        } catch (error) {
+                                            value['size'] = { width: 0, height: 0 }
+                                            value['blur'] = ''
+                                        }
                                         b[type] = value
                                     })
                             )

@@ -1,7 +1,6 @@
 import Moment from "react-moment";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
-import { getPlaiceholder } from "plaiceholder";
 import { Colors } from "../lib/colors";
 import { getDatabase } from "../lib/notion";
 import { Post } from "../lib/types";
@@ -9,6 +8,7 @@ import Image from "next/image";
 import { FullListLayout } from "../components/layout/ListLayout";
 import moment from "moment";
 import ThemedImage from "../components/ThemedImage";
+import { getImageBlurDataURL } from "../lib/imagePlaceholders";
 
 // TODO: Add pagination and filter
 
@@ -68,12 +68,8 @@ export const getStaticProps: GetStaticProps = async () => {
     for (let post of db) {
         if (post) {
             try {
-                post.cover.blurLight = (await getPlaiceholder(post.cover.light, {
-                    size: 10,
-                })).base64
-                post.cover.blurDark = (await getPlaiceholder(post.cover.dark, {
-                    size: 10,
-                })).base64
+                post.cover.blurLight = await getImageBlurDataURL(post.cover.light)
+                post.cover.blurDark = await getImageBlurDataURL(post.cover.dark)
             } catch (e) {
                 post.cover.blurLight = ''
                 post.cover.blurDark = ''
